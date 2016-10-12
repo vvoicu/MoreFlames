@@ -1,4 +1,4 @@
-@Fashion
+@Fashion @Fr @Cart
 Feature: Check products in cart
   In order to buy products
   As a user

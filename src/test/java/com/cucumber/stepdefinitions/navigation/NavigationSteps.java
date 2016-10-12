@@ -25,7 +25,6 @@ public class NavigationSteps {
 	public NavigationSteps() {
 		abstractPage = new AbstractPage(driver);
 		headerPage = new HeaderPage(driver);
-
 	}
 
 	@Given("the user is in home page")
@@ -39,6 +38,7 @@ public class NavigationSteps {
 		headerPage.selectGender(gender);
 		headerPage.typeSearchValue(product);
 		headerPage.submitSearch();
+		
 	}
 
 	@When("the user goes to cart")

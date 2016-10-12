@@ -1,3 +1,4 @@
+@Search
 Feature: Check search feature
   In order to check the search feature
   As a user

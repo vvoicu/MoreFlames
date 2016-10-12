@@ -99,8 +99,9 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 	}
 
 	public static void initiateExtentCucumberFormatter() {
-		String reportFilePath = "output" + File.separator + "Run_" + System.currentTimeMillis() + File.separator + "report.html";
-		initiateExtentCucumberFormatter(new File(reportFilePath));
+		String reportFilePath = "output" + File.separator + "RunReport" + File.separator + "report.html";
+//		String reportFilePath = "output" + File.separator + "Run_" + System.currentTimeMillis() + File.separator + "report.html";
+		initiateExtentCucumberFormatter(new File(reportFilePath), false);
 	}
 
 	public static void loadConfig(File configFile) {
@@ -157,8 +158,11 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 	}
 
 	public void write(String s) {
-		if (!scenarioOutlineTest)
+		if (!scenarioOutlineTest){
 			scenarioTest.log(LogStatus.INFO, s);
+//			String fileName = "screenshot-" + System.currentTimeMillis() + ".png";
+//			scenarioTest.log(LogStatus.INFO, scenarioTest.addScreenCapture(fileName));	
+		}
 	}
 
 	public void syntaxError(String s, String s1, List<String> list, String s2, Integer integer) {

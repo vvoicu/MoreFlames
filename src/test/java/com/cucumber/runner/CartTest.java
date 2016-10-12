@@ -27,7 +27,7 @@ public class CartTest {
 		setEnvironmentVariables();
 		ExtentCucumberFormatter.addSystemInfo("Browser Name", System.getProperty("browser.type"));
 //		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
-//		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
+		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
 //		Map<String, String> systemInfo = new HashMap<String, String>();
 //		systemInfo.put("Cucumber version", "v1.2.3");
@@ -37,7 +37,7 @@ public class CartTest {
 	
 	private static void setEnvironmentVariables(){
 		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver");
-		System.setProperty("browser.type", "fire");
+		System.setProperty("browser.type", "Firefox");
 		System.getProperty("webdriver.chrome.path");
 	}
 
