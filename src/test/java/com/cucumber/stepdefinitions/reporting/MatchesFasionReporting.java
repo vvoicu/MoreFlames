@@ -3,6 +3,7 @@ package com.cucumber.stepdefinitions.reporting;
 import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.cucumber.pages.AbstractPage;
@@ -29,10 +30,23 @@ import cucumber.api.java.en.When;
  *
  */
 public class MatchesFasionReporting extends AbstractSteps {
+	
+
+	
+	private void setDriver(){
+		String browserType = System.getProperty("browser.type");
+		if (browserType.contains("chrome")) {
+			driver = new ChromeDriver();
+		} else {
+			driver = new FirefoxDriver();
+		}
+	}
 
 	@Before
 	public void setup() {
-		driver = new FirefoxDriver();
+//		setEnvironmentVariables();
+		setDriver();
+
 		abstractPage = new AbstractPage(driver);
 		headerPage = new HeaderPage(driver);
 		productListPage = new ProductListPage(driver);
@@ -43,6 +57,7 @@ public class MatchesFasionReporting extends AbstractSteps {
 	@Given("the user is in home page")
 	public void givenTheUserIsOnTheHomePage() {
 		driver.get(Constants.BASE_URL);
+		driver.manage().window().maximize();
 	}
 
 	@Given("searches for '(.*)' in '(.*)' section")
@@ -61,7 +76,6 @@ public class MatchesFasionReporting extends AbstractSteps {
 	@Given("adds to cart '(.*)' products of size '(.*)'")
 	public void givenTheUserAddsProductToCart(String quantity, String size) {
 		productDetailsPage.addProductToCart(quantity, size);
-
 	}
 
 	@When("the user goes to cart")

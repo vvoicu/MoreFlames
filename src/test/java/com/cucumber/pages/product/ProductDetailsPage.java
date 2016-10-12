@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import com.cucumber.pages.AbstractPage;
 import com.tools.CartCalculations;
 import com.tools.CartDataHandler;
-import com.tools.Constants;
 import com.tools.entities.CartProductModel;
 import com.tools.utils.FormatterUtils;
 
@@ -25,6 +24,8 @@ public class ProductDetailsPage extends AbstractPage {
 	private String productPriceContainerLocator = "div.pdp__header.hidden-mobile p.pdp-price";
 	private String productNameContainerLocator = "div.pdp__header.hidden-mobile span.pdp-description";
 	private String productCodeContainerLocator = "#mCSB_1_container span.pdp__product-code";
+	private String productQuantitySelectorLocator = "div.pdp__description-wrapper #quantityDD";
+	private String productSizeSelectorLocator = "div.pdp__description-wrapper #entrySizeVariant";
 
 	public void addProductToCart() {
 		scrollToPageTop();
@@ -35,12 +36,12 @@ public class ProductDetailsPage extends AbstractPage {
 
 	public void selectQuantity(String quantity) {
 		waitForPageToLoad();
-		new Select(driver.findElement(By.cssSelector("div.pdp__description-wrapper #quantityDD"))).selectByVisibleText(quantity);
+		new Select(driver.findElement(By.cssSelector(productQuantitySelectorLocator))).selectByVisibleText(quantity);
 	}
 
 	public void selectSize(String size) {
 		waitForPageToLoad();
-		new Select(driver.findElement(By.cssSelector("div.pdp__description-wrapper #entrySizeVariant"))).selectByVisibleText(size);
+		new Select(driver.findElement(By.cssSelector(productSizeSelectorLocator))).selectByVisibleText(size);
 	}
 
 	private String getProductPrice() {
@@ -63,16 +64,13 @@ public class ProductDetailsPage extends AbstractPage {
 
 		return product;
 	}
-
+	
 	public void addProductToCart(String quantity, String size) {
 		CartProductModel product = new CartProductModel();
+		
+		selectSize(size);
+		product.setSize(size);
 
-		if (size.contains(Constants.ONE_SIZE)) {
-			product.setSize(Constants.ONE_SIZE);
-		} else {
-			selectSize(size);
-			product.setSize(size);
-		}
 		selectQuantity(quantity);
 		product = getProductDetails(product);
 		product.setQuantity(quantity);

@@ -2,12 +2,12 @@ package com.tools.entities;
 
 public class CartProductModel {
 
-	String name;
-	String code;
-	String unitPrice;
-	String askingPrice;
-	String quantity;
-	String size;
+	private String name;
+	private String code;
+	private String unitPrice;
+	private String askingPrice;
+	private String quantity;
+	private String size;
 
 	public String getName() {
 		return name;
