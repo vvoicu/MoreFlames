@@ -1,4 +1,4 @@
-package com.cucumber.pages;
+package com.cucumber.pages.product;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.cucumber.pages.AbstractPage;
 import com.tools.CartCalculations;
 import com.tools.CartDataHandler;
 import com.tools.Constants;

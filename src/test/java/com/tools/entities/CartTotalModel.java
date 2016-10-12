@@ -2,10 +2,10 @@ package com.tools.entities;
 
 public class CartTotalModel {
 
-	String unitTotal;
-	String delivery;
-	String discount;
-	String total;
+	private String unitTotal;
+	private String delivery;
+	private String discount;
+	private String total;
 
 	public String getUnitTotal() {
 		return unitTotal;

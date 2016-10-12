@@ -7,10 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.cucumber.pages.AbstractPage;
-import com.cucumber.pages.CartPage;
 import com.cucumber.pages.HeaderPage;
-import com.cucumber.pages.ProductDetailsPage;
-import com.cucumber.pages.ProductListPage;
+import com.cucumber.pages.checkout.CartPage;
+import com.cucumber.pages.product.ProductDetailsPage;
+import com.cucumber.pages.search.ProductListPage;
 import com.tools.CartCalculations;
 import com.tools.CartDataHandler;
 import com.tools.Constants;
@@ -29,15 +29,9 @@ import cucumber.api.java.en.When;
  * 
  *
  */
-public class MatchesFasionReporting {
+public class MatchesFasionReporting extends AbstractSteps{
 
-	WebDriver driver;
-	HeaderPage headerPage;
-	AbstractPage abstractPage;
-	ProductListPage productListPage;
-	ProductDetailsPage productDetailsPage;
-	CartPage cartPage;
-
+	
 	@Before
 	public void setup() {
 		driver = new FirefoxDriver();

@@ -16,11 +16,9 @@ import java.util.Map;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsInCart.feature",
-		"src/test/resources/features/search/Search.feature" }, glue = {
-				"com.cucumber.stepdefinitions.reporting" }, plugin = {
-						"com.cucumber.listener.ExtentCucumberFormatter" })
-public class ExtentReportCartTest {
+@CucumberOptions(features = { "src/test/resources/features/search/Search.feature" }, glue = { "com.cucumber.stepdefinitions.reporting" }, plugin = {
+		"com.cucumber.listener.ExtentCucumberFormatter" })
+public class SearchTest {
 
 	@BeforeClass
 	public static void setup() {

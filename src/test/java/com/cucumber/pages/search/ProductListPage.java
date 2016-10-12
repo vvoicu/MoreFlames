@@ -1,4 +1,4 @@
-package com.cucumber.pages;
+package com.cucumber.pages.search;
 
 import java.util.List;
 
@@ -7,15 +7,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.cucumber.pages.AbstractPage;
+
 public class ProductListPage extends AbstractPage {
 
 	public ProductListPage(WebDriver driver) {
 		super(driver);
 	}
-	
-	public List<WebElement> getProductsList(){
-		return driver
-				.findElements(By.cssSelector("ul.lister__wrapper li div.lister__item__inner"));
+
+	public List<WebElement> getProductsList() {
+		return driver.findElements(By.cssSelector("ul.lister__wrapper li div.lister__item__inner"));
 	}
 
 	public void openProductDetails(String productName) {
@@ -31,7 +32,7 @@ public class ProductListPage extends AbstractPage {
 		}
 		Assert.assertTrue("The product '" + productName + "' hasn't been found", found);
 	}
-	
+
 	public void verifyProductDesigner(String designer) {
 		boolean found = true;
 		List<WebElement> productList = getProductsList();
