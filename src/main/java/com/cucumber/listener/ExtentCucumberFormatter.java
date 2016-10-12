@@ -22,10 +22,11 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 	private ExtentTest featureTest;
 	private ExtentTest scenarioTest;
 	private LinkedList<Step> testSteps = new LinkedList<Step>();
-	private static File htmlReportDir;
-	private static Map systemInfo;
+	private static File HTML_REPORT_DIR;
+	private static Map<String, String> systemInfo;
 	private boolean scenarioOutlineTest;
 
+	@SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 	private static final Map<String, String> MIME_TYPES_EXTENSIONS = new HashMap() {
 		{
 			this.put("image/bmp", "bmp");
@@ -40,12 +41,12 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 	public ExtentCucumberFormatter(File filePath) {
 		if (!filePath.getPath().equals("")) {
 			String reportPath = filePath.getPath();
-			this.htmlReportDir = new File(reportPath);
-			this.extent = new ExtentReports(reportPath);
+			HTML_REPORT_DIR = new File(reportPath);
+			extent = new ExtentReports(reportPath);
 		} else {
 			String reportDir = "output/Run_" + System.currentTimeMillis();
-			this.htmlReportDir = new File(reportDir);
-			this.extent = new ExtentReports(reportDir + "/report.html");
+			HTML_REPORT_DIR = new File(reportDir);
+			extent = new ExtentReports(reportDir + "/report.html");
 		}
 	}
 
@@ -53,7 +54,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 	}
 
 	public static void initiateExtentCucumberFormatter(File filePath, Boolean replaceExisting, DisplayOrder displayOrder, NetworkMode networkMode, Locale locale) {
-		htmlReportDir = filePath;
+		HTML_REPORT_DIR = filePath;
 		extent = new ExtentReports(filePath.getAbsolutePath(), replaceExisting, displayOrder, networkMode, locale);
 	}
 
@@ -108,14 +109,14 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 
 	public static void addSystemInfo(String param, String value) {
 		if (systemInfo == null) {
-			systemInfo = new HashMap();
+			systemInfo = new HashMap<String, String>();
 		}
 		systemInfo.put(param, value);
 	}
 
 	public static void addSystemInfo(Map<String, String> info) {
 		if (systemInfo == null) {
-			systemInfo = new HashMap();
+			systemInfo = new HashMap<String, String>();
 		}
 		systemInfo.putAll(info);
 	}
@@ -219,7 +220,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
 
 	private OutputStream reportFileOutputStream(String fileName) {
 		try {
-			return new URLOutputStream(new URL(this.htmlReportDir.toURI().toURL(), fileName));
+			return new URLOutputStream(new URL(HTML_REPORT_DIR.toURI().toURL(), fileName));
 		} catch (IOException var3) {
 			throw new CucumberException(var3);
 		}

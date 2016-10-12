@@ -18,5 +18,4 @@ public class AbstractSteps {
 	public CartPage cartPage;
 
 
-
 }

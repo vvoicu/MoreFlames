@@ -29,7 +29,7 @@ public class CartTest {
 		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
 		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
-		Map systemInfo = new HashMap();
+		Map<String, String> systemInfo = new HashMap<String, String>();
 		systemInfo.put("Cucumber version", "v1.2.3");
 		systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
 		ExtentCucumberFormatter.addSystemInfo(systemInfo);

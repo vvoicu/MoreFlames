@@ -3,7 +3,6 @@ package com.cucumber.stepdefinitions.reporting;
 import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.cucumber.pages.AbstractPage;
@@ -29,9 +28,8 @@ import cucumber.api.java.en.When;
  * 
  *
  */
-public class MatchesFasionReporting extends AbstractSteps{
+public class MatchesFasionReporting extends AbstractSteps {
 
-	
 	@Before
 	public void setup() {
 		driver = new FirefoxDriver();
@@ -83,7 +81,7 @@ public class MatchesFasionReporting extends AbstractSteps{
 		CartDataHandler.calculatedtotal = CartCalculations.calculateCartTotals(CartDataHandler.addedProductList, Constants.DELIVERY_PRICE);
 		Validations.verifyTotals();
 	}
-	
+
 	@Then("all the products displayed should be from '(.*)'")
 	public void thenTheUserShouldBeOfSearchedDesigner(String designer) {
 		productListPage.verifyProductDesigner(designer);
@@ -92,8 +90,7 @@ public class MatchesFasionReporting extends AbstractSteps{
 	@Then("the displayed product code should be '(.*)'")
 	public void verifyThatProductCodeIsCorrect(String productCode) {
 		productListPage.verifyUniqueAndOpenProduct();
-		Assert.assertTrue("The product code is not correct",
-				productDetailsPage.getProductCode().contentEquals(productCode));
+		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
 	}
 
 	@After
