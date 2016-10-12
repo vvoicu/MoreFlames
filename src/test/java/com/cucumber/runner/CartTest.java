@@ -16,7 +16,7 @@ import cucumber.api.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsInCart.feature" }, glue = {
+@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsFrInCart.feature" }, glue = {
 		"com.cucumber.stepdefinitions.reporting" }, plugin = { "com.cucumber.listener.ExtentCucumberFormatter" })
 public class CartTest {
 
@@ -25,7 +25,7 @@ public class CartTest {
 		ExtentCucumberFormatter.initiateExtentCucumberFormatter();
 		ExtentCucumberFormatter.loadConfig(new File("src/test/resources/extent-config.xml"));
 		setEnvironmentVariables();
-//		ExtentCucumberFormatter.addSystemInfo("Browser Name", "Firefox");
+		ExtentCucumberFormatter.addSystemInfo("Browser Name", System.getProperty("browser.type"));
 //		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
 //		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 

@@ -1,24 +1,19 @@
 package com.cucumber.stepdefinitions.reporting;
 
 import org.junit.Assert;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 import com.cucumber.pages.AbstractPage;
 import com.cucumber.pages.HeaderPage;
 import com.cucumber.pages.checkout.CartPage;
 import com.cucumber.pages.product.ProductDetailsPage;
 import com.cucumber.pages.search.ProductListPage;
+import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.CartCalculations;
 import com.tools.CartDataHandler;
 import com.tools.Constants;
 import com.tools.Validations;
 
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -29,30 +24,24 @@ import cucumber.api.java.en.When;
  * 
  *
  */
-public class MatchesFasionReporting extends AbstractSteps {
+public class MatchesFasionReporting {
 	
-
+	public WebDriver driver;
+	public HeaderPage headerPage;
+	public AbstractPage abstractPage;
+	public ProductListPage productListPage;
+	public ProductDetailsPage productDetailsPage;
+	public CartPage cartPage;
 	
-	private void setDriver(){
-		String browserType = System.getProperty("browser.type");
-		if (browserType.contains("chrome")) {
-			driver = new ChromeDriver();
-		} else {
-			driver = new FirefoxDriver();
-		}
-	}
-
-	@Before
-	public void setup() {
-//		setEnvironmentVariables();
-		setDriver();
-
+	public MatchesFasionReporting() {
+		driver = new WebDriverCore().getDriver();
 		abstractPage = new AbstractPage(driver);
 		headerPage = new HeaderPage(driver);
 		productListPage = new ProductListPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
 		cartPage = new CartPage(driver);
 	}
+
 
 	@Given("the user is in home page")
 	public void givenTheUserIsOnTheHomePage() {
@@ -107,18 +96,6 @@ public class MatchesFasionReporting extends AbstractSteps {
 		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
 	}
 
-	@After
-	public void tearDown(Scenario scenario) {
 
-		if (scenario.isFailed()) {
-			byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-			scenario.embed(screenshotBytes, "image/png");
-		}
-
-		if (driver != null) {
-			driver.quit();
-		}
-
-	}
 
 }

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extentreports>
-    <configuration>
-        <encoding>UTF-8</encoding>
-        <documentTitle>Cucumber Extent Reports - v1.0.0</documentTitle>
-        <reportName>Cucumber Extent Reports</reportName>
-        <reportHeadline> - v1.0.0</reportHeadline>
-    </configuration>
+	<configuration>
+		<encoding>UTF-8</encoding>
+		<documentTitle>Matches</documentTitle>
+		<reportName>Test Report</reportName>
+		<reportHeadline> v1.0</reportHeadline>
+
+		<theme>dark</theme>
+		<protocol>https</protocol>
+		<dateFormat>yyyy-MM-dd</dateFormat>
+		<timeFormat>HH:mm:ss</timeFormat>
+	</configuration>
 </extentreports>
