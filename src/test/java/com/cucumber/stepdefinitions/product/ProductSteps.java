@@ -1,10 +1,8 @@
-package com.cucumber.stepdefinitions.reporting;
+package com.cucumber.stepdefinitions.product;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import com.cucumber.pages.AbstractPage;
-import com.cucumber.pages.HeaderPage;
 import com.cucumber.pages.checkout.CartPage;
 import com.cucumber.pages.product.ProductDetailsPage;
 import com.cucumber.pages.search.ProductListPage;
@@ -16,46 +14,20 @@ import com.tools.Validations;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
-/**
- * The class has a small adjustment in the after class to include some reporting
- * actions
- * 
- *
- */
-public class MatchesFasionReporting {
-	
-	public WebDriver driver;
-	public HeaderPage headerPage;
-	public AbstractPage abstractPage;
+public class ProductSteps {
+
+	public WebDriver driver = new WebDriverCore().getDriver();
 	public ProductListPage productListPage;
 	public ProductDetailsPage productDetailsPage;
 	public CartPage cartPage;
-	
-	public MatchesFasionReporting() {
-		driver = new WebDriverCore().getDriver();
-		abstractPage = new AbstractPage(driver);
-		headerPage = new HeaderPage(driver);
+
+	public ProductSteps() {
 		productListPage = new ProductListPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
 		cartPage = new CartPage(driver);
 	}
-
-
-	@Given("the user is in home page")
-	public void givenTheUserIsOnTheHomePage() {
-		driver.get(Constants.BASE_URL);
-		driver.manage().window().maximize();
-	}
-
-	@Given("searches for '(.*)' in '(.*)' section")
-	public void givenTheUserSearchesForProduct(String product, String gender) {
-		headerPage.expandSearch();
-		headerPage.selectGender(gender);
-		headerPage.typeSearchValue(product);
-		headerPage.submitSearch();
-	}
+	
 
 	@Given("selects the product '(.*)'")
 	public void givenTheUserSelectsTheProduct(String product) {
@@ -65,11 +37,6 @@ public class MatchesFasionReporting {
 	@Given("adds to cart '(.*)' products of size '(.*)'")
 	public void givenTheUserAddsProductToCart(String quantity, String size) {
 		productDetailsPage.addProductToCart(quantity, size);
-	}
-
-	@When("the user goes to cart")
-	public void goToCart() {
-		headerPage.goToCart();
 	}
 
 	@Then("the products should be correctly displayed")
@@ -95,7 +62,5 @@ public class MatchesFasionReporting {
 		productListPage.verifyUniqueAndOpenProduct();
 		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
 	}
-
-
 
 }

@@ -16,7 +16,7 @@ import java.util.Map;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/search/Search.feature" }, glue = { "com.cucumber.stepdefinitions.reporting" }, plugin = {
+@CucumberOptions(features = { "src/test/resources/features/search/Search.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = {
 		"com.cucumber.listener.ExtentCucumberFormatter" })
 public class SearchTest {
 
