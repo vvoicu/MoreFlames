@@ -20,7 +20,6 @@ public class ProductSteps {
 	public ProductListPage productListPage;
 	public ProductDetailsPage productDetailsPage;
 
-
 	public ProductSteps() {
 		productListPage = new ProductListPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
@@ -46,20 +45,25 @@ public class ProductSteps {
 		productListPage.verifyUniqueAndOpenProduct();
 		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
 	}
-	
-	
+
 	@Then("^all the products are displayed$")
 	public void all_the_products_are_displayed() {
-		
+
 		List<SearchProductModel> searchList = new ArrayList<SearchProductModel>();
 		searchList.addAll(productListPage.grabSearchProductsList());
 		System.out.println("All products: " + searchList.size());
-		while(productListPage.clickIfNextPresent()){
-//			productListPage.clickOnNext();
+		while (productListPage.clickIfNextPresent()) {
+			//			productListPage.clickOnNext();
 			searchList.addAll(productListPage.grabSearchProductsList());
 		}
 		System.out.println("All products: " + searchList.size());
-		
+
+	}
+
+	@Then("the displayed product should have code: '(.*)', title: '(.*)', details: '(.*)', price '(.*)'")
+	public void displayedProductCodeTitleDetailsAndPrice(String code, String title, String details, String price) throws Throwable {
+		productListPage.verifyUniqueAndOpenProduct();
+		productDetailsPage.verifyProductDetails(code, title, details, price);
 	}
 
 }

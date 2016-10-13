@@ -16,7 +16,7 @@ import cucumber.api.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/search/SearchAllProducts.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = {
+@CucumberOptions(features = { "src/test/resources/features/search/SearchByProductCode.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = {
 		"com.cucumber.listener.ExtentCucumberFormatter" })
 public class SearchTest {
 
@@ -26,13 +26,13 @@ public class SearchTest {
 		ExtentCucumberFormatter.loadConfig(new File("src/test/resources/extent-config.xml"));
 
 		ExtentCucumberFormatter.addSystemInfo("Browser Name", "Firefox");
-//		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
+		//		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
 		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
-//		Map<String, String> systemInfo = new HashMap<String, String>();
-//		systemInfo.put("Cucumber version", "v1.2.3");
-//		systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
-//		ExtentCucumberFormatter.addSystemInfo(systemInfo);
+		//		Map<String, String> systemInfo = new HashMap<String, String>();
+		//		systemInfo.put("Cucumber version", "v1.2.3");
+		//		systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
+		//		ExtentCucumberFormatter.addSystemInfo(systemInfo);
 	}
 
 }
