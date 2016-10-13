@@ -1,11 +1,15 @@
 package com.cucumber.stepdefinitions.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
 import com.cucumber.pages.product.ProductDetailsPage;
 import com.cucumber.pages.search.ProductListPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
+import com.tools.data.search.SearchProductModel;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -41,6 +45,21 @@ public class ProductSteps {
 	public void verifyThatProductCodeIsCorrect(String productCode) {
 		productListPage.verifyUniqueAndOpenProduct();
 		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
+	}
+	
+	
+	@Then("^all the products are displayed$")
+	public void all_the_products_are_displayed() {
+		
+		List<SearchProductModel> searchList = new ArrayList<SearchProductModel>();
+		searchList.addAll(productListPage.grabSearchProductsList());
+		System.out.println("All products: " + searchList.size());
+		while(productListPage.clickIfNextPresent()){
+//			productListPage.clickOnNext();
+			searchList.addAll(productListPage.grabSearchProductsList());
+		}
+		System.out.println("All products: " + searchList.size());
+		
 	}
 
 }

@@ -49,13 +49,18 @@ public class AbstractPage {
 		return (new WebDriverWait(driver, Constants.WAIT_TIME_LARGE_SEC)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssLocator)));
 	}
 
+	protected boolean isElementPresentByCssLocator(String cssLocator) {
+		System.out.println(driver.findElements(By.cssSelector(cssLocator)).size());
+		return driver.findElements(By.cssSelector(cssLocator)).size() != 0;
+	}
+
+
 	protected WebElement waitForElementByCssLocatorToBeClickable(String cssLocator) {
 		return (new WebDriverWait(driver, Constants.WAIT_TIME_LARGE_SEC)).until(ExpectedConditions.elementToBeClickable(By.cssSelector(cssLocator)));
 	}
 
 	protected List<WebElement> waitForElementsByCssLocator(String cssLocator) {
-		return (new WebDriverWait(driver, Constants.WAIT_TIME_LARGE_SEC))
-				.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(cssLocator)));
+		return (new WebDriverWait(driver, Constants.WAIT_TIME_LARGE_SEC)).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(cssLocator)));
 	}
 
 	protected void selectFromDropdownByVisibleText(String cssLocator, String textValue) {

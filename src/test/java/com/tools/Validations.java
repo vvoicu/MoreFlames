@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import com.tools.entities.CartProductModel;
+import com.tools.data.cart.CartProductModel;
 import com.tools.utils.PrintUtils;
 
 public class Validations {

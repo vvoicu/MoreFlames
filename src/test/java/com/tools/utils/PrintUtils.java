@@ -2,8 +2,8 @@ package com.tools.utils;
 
 import java.util.List;
 
-import com.tools.entities.CartProductModel;
-import com.tools.entities.CartTotalModel;
+import com.tools.data.cart.CartProductModel;
+import com.tools.data.cart.CartTotalModel;
 
 public class PrintUtils {
 
@@ -31,5 +31,7 @@ public class PrintUtils {
 		System.out.println("-------------------------");
 
 	}
+	
+	
 
 }

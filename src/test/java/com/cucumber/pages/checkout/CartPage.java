@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 import com.cucumber.pages.AbstractPage;
 import com.tools.CartDataHandler;
 import com.tools.Constants;
-import com.tools.entities.CartProductModel;
-import com.tools.entities.CartTotalModel;
+import com.tools.data.cart.CartProductModel;
+import com.tools.data.cart.CartTotalModel;
 import com.tools.utils.FormatterUtils;
 
 public class CartPage extends AbstractPage {

@@ -1,4 +1,4 @@
-package com.tools.entities;
+package com.tools.data.cart;
 
 public class CartTotalModel {
 

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.cucumber.pages.AbstractPage;
 import com.tools.CartCalculations;
 import com.tools.CartDataHandler;
-import com.tools.entities.CartProductModel;
+import com.tools.data.cart.CartProductModel;
 import com.tools.utils.FormatterUtils;
 
 public class ProductDetailsPage extends AbstractPage {

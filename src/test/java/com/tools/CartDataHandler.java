@@ -3,8 +3,8 @@ package com.tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tools.entities.CartProductModel;
-import com.tools.entities.CartTotalModel;
+import com.tools.data.cart.CartProductModel;
+import com.tools.data.cart.CartTotalModel;
 
 public class CartDataHandler {
 

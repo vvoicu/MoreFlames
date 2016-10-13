@@ -7,7 +7,9 @@ import com.cucumber.pages.HeaderPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.Constants;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
@@ -45,5 +47,6 @@ public class NavigationSteps {
 	public void goToCart() {
 		headerPage.goToCart();
 	}
+
 
 }
