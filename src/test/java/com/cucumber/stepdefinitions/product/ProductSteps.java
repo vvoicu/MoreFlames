@@ -46,6 +46,11 @@ public class ProductSteps {
 		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
 	}
 
+	@Then("the displayed products details should contain the '(.*)'")
+	public void verifyTheCategoryOfTheDisplayedProducts(String category) {
+		productListPage.verifyProductCategory(category);
+	}
+
 	@Then("^all the products are displayed$")
 	public void all_the_products_are_displayed() {
 

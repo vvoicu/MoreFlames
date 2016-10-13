@@ -24,7 +24,7 @@ public class ProductListPage extends AbstractPage {
 	private String itemDetailsLocator = "a div.lister__item__details";
 	private String itemPriceLocator = "a div.lister__item__details";
 	private String itemUrlLocator = "a[title]";
-	
+
 	private String nextButtonsLocator = ".redefine__right__pager > li.next a";
 
 	public List<SearchProductModel> grabSearchProductsList() {
@@ -43,18 +43,38 @@ public class ProductListPage extends AbstractPage {
 
 		return resultList;
 	}
-	
-	public boolean clickIfNextPresent(){
+
+	public void verifyProductCategory(String category) {
+		boolean found = true;
+		List<SearchProductModel> products = new ArrayList<SearchProductModel>();
+		products.addAll(grabSearchProductsList());
+		while (clickIfNextPresent()) {
+			products.addAll(grabSearchProductsList());
+		}
+		System.out.println(products.size());
+
+		for (SearchProductModel itemNow : products) {
+			if (!itemNow.getDetails().contains(category)) {
+				found = false;
+				System.out.println(itemNow.getDetails());
+				break;
+			}
+		}
+
+		Assert.assertTrue("Search result doesn't matched search criteria", found);
+	}
+
+	public boolean clickIfNextPresent() {
 		boolean isPresent = driver.findElements(By.cssSelector(nextButtonsLocator)).size() != 0;
 		if (isPresent) {
-//			driver.findElements(By.cssSelector(nextButtonsLocator)).get(0).click();
+			// driver.findElements(By.cssSelector(nextButtonsLocator)).get(0).click();
 			String url = driver.findElements(By.cssSelector(nextButtonsLocator)).get(0).getAttribute("href");
 			driver.get(url);
 		}
 
 		return isPresent;
 	}
-	
+
 	public List<WebElement> getProductsList() {
 		return driver.findElements(By.cssSelector(productsListLocator));
 	}
