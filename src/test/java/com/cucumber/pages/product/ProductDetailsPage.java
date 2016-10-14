@@ -106,14 +106,15 @@ public class ProductDetailsPage extends AbstractPage {
 	public void verifyProductDetails(String code, String title, String details, String price) {
 
 		ProductDetailModel product = grabProductData();
-		//		System.out.println("Expected: details- " + product.getDetails() + "---");
-		//		System.out.println("Actual: details- " + details + "---");
+		System.out.println("Expected: details- " + product.getDetails() + "---");
+		System.out.println("Actual: details- " + details + "---");
 		//		System.out.println("Expected: title- " + product.getTitle() + "---");
 		//		System.out.println("Actual: title- " + title + "---");
-		System.out.println(details);
+		//System.out.println(details);
 		Assert.assertTrue("The product code is not correct", product.getCode().contains(code));
-		Assert.assertTrue("The product details is not correct", product.getTitle().toUpperCase().contains(title));
-		Assert.assertTrue("The product title is not correct", product.getDetails().trim().toUpperCase().contains(details.trim()));
+		Assert.assertTrue("The product title is not correct", product.getTitle().contains(title));
+		Assert.assertTrue("The product details is not correct", product.getDetails().trim().contains(details));
 		Assert.assertTrue("The product price is not correct", product.getPrice().contains(price));
 	}
+
 }

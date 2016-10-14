@@ -1,11 +1,16 @@
 package com.cucumber.stepdefinitions.navigation;
 
+import java.util.List;
+import java.util.Map;
+
 import com.cucumber.pages.AbstractPage;
 import com.cucumber.pages.HeaderPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.Constants;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
@@ -34,13 +39,43 @@ public class NavigationSteps {
 		headerPage.selectGender(gender);
 		headerPage.typeSearchValue(product);
 		headerPage.submitSearch();
+
+	}
+	
+	@And("click the items and verify the pageUrls")
+	public void clickTheItems(Map<String, String> items){
+		for (String itemKey : items.keySet()) {
+			System.out.println("key: " + itemKey);
+			System.out.println("value: " + items.get(itemKey));
+			headerPage.selectMenuOption(itemKey);
+			headerPage.verifyTheUrlPage(items.get(itemKey));
+		}
+	}
+
+	@And("click the items")
+	public void clickTheItems(List<String> items, List<String> pageNames) {
+		for (String string : items) {
+			headerPage.selectMenuOption(string);
+
+		}
 		
+	}
+
+	@Then("select the '(.*)' option")
+	public void givenTheUserSelectsTheSpecificSection(String section) {
+		headerPage.selectSection(section);
+
+	}
+
+	@Given("click the '(.*)'")
+	public void givenTheUserSelectsAMenuOption(String menuOption) {
+		headerPage.selectMenuOption(menuOption);
+
 	}
 
 	@When("the user goes to cart")
 	public void goToCart() {
 		headerPage.goToCart();
 	}
-
 
 }
