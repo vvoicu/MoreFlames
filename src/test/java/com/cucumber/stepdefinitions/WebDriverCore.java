@@ -3,6 +3,7 @@ package com.cucumber.stepdefinitions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 
 public class WebDriverCore {
@@ -20,6 +21,12 @@ public class WebDriverCore {
 
 	public WebDriver getDriver() {
 		return driver;
+	}
+	
+	@After
+	public void tearDown(){
+		driver.close();
+		driver.quit();
 	}
 
 }

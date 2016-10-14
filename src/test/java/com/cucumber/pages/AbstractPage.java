@@ -22,7 +22,6 @@ public class AbstractPage {
 
 	public void navigateTo(String URL) {
 		driver.get(URL);
-		driver.manage().window().maximize();
 	}
 
 	/**
