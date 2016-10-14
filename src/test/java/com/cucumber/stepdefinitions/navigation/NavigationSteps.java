@@ -1,15 +1,11 @@
 package com.cucumber.stepdefinitions.navigation;
 
-import org.openqa.selenium.WebDriver;
-
 import com.cucumber.pages.AbstractPage;
 import com.cucumber.pages.HeaderPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.Constants;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
@@ -19,14 +15,12 @@ import cucumber.api.java.en.When;
  *
  */
 public class NavigationSteps {
-
-	public WebDriver driver = new WebDriverCore().getDriver();
 	public HeaderPage headerPage;
 	public AbstractPage abstractPage;
 
-	public NavigationSteps() {
-		abstractPage = new AbstractPage(driver);
-		headerPage = new HeaderPage(driver);
+	public NavigationSteps(WebDriverCore driver) {
+		abstractPage = new AbstractPage(driver.getDriver());
+		headerPage = new HeaderPage(driver.getDriver());
 	}
 
 	@Given("the user is in home page")

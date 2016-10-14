@@ -26,13 +26,15 @@ public class CartTest {
 		ExtentCucumberFormatter.loadConfig(new File("src/test/resources/extent-config.xml"));
 		setEnvironmentVariables();
 		ExtentCucumberFormatter.addSystemInfo("Browser Name", System.getProperty("browser.type"));
-//		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
 		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
 //		Map<String, String> systemInfo = new HashMap<String, String>();
 //		systemInfo.put("Cucumber version", "v1.2.3");
 //		systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
 //		ExtentCucumberFormatter.addSystemInfo(systemInfo);
+		
+//		Injector injector = Guice.createInjector(new DriverModule());
+//		WebDriverFirerox webDriverCore = injector.getInstance(WebDriverFirerox.class);
 	}
 	
 	private static void setEnvironmentVariables(){

@@ -26,7 +26,6 @@ public class SearchTest {
 		ExtentCucumberFormatter.loadConfig(new File("src/test/resources/extent-config.xml"));
 
 		ExtentCucumberFormatter.addSystemInfo("Browser Name", "Firefox");
-		//		ExtentCucumberFormatter.addSystemInfo("Browser version", "v31.0");
 		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
 		//		Map<String, String> systemInfo = new HashMap<String, String>();

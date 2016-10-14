@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import com.cucumber.pages.product.ProductDetailsPage;
 import com.cucumber.pages.search.ProductListPage;
@@ -15,14 +14,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class ProductSteps {
-
-	public WebDriver driver = new WebDriverCore().getDriver();
 	public ProductListPage productListPage;
 	public ProductDetailsPage productDetailsPage;
 
-	public ProductSteps() {
-		productListPage = new ProductListPage(driver);
-		productDetailsPage = new ProductDetailsPage(driver);
+	public ProductSteps(WebDriverCore driver) {
+		productListPage = new ProductListPage(driver.getDriver());
+		productDetailsPage = new ProductDetailsPage(driver.getDriver());
 	}
 
 	@Given("selects the product '(.*)'")
