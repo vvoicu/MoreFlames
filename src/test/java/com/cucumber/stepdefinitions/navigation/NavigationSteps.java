@@ -1,5 +1,7 @@
 package com.cucumber.stepdefinitions.navigation;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 
 import com.cucumber.pages.AbstractPage;
@@ -7,7 +9,9 @@ import com.cucumber.pages.HeaderPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.Constants;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
@@ -39,6 +43,23 @@ public class NavigationSteps {
 		headerPage.typeSearchValue(product);
 		headerPage.submitSearch();
 
+	}
+
+	@And("click the items")
+	public void clickTheItems(List<String> items, List<String> pageNames) {
+		for (String string : items) {
+			headerPage.selectMenuOption(string);
+		}
+	}
+
+	@Then("select the '(.*)' option")
+	public void givenTheUserSelectsTheSpecificSection(String section) {
+		headerPage.selectSection(section);
+	}
+
+	@Given("click the '(.*)'")
+	public void givenTheUserSelectsAMenuOption(String menuOption) {
+		headerPage.selectMenuOption(menuOption);
 	}
 
 	@When("the user goes to cart")

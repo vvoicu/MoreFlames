@@ -1,6 +1,10 @@
 package com.cucumber.pages;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HeaderPage extends AbstractPage {
 
@@ -15,6 +19,10 @@ public class HeaderPage extends AbstractPage {
 	private String cartButtonLocator = "a.miniCart--hover";
 	private String searchInputLocator = "input#search";
 	private String searchSubmitButtonLocator = "#searchSubmit";
+	private String menSectionLocator = "span.men";
+	private String womenSectionLocator = "span.women";
+
+	private String menuOptionLocator = "div#nav_main .main-menu__wrapper>li";
 
 	public void expandSearch() {
 		waitForElementByCssLocator(expandSearchButtonLocator).click();
@@ -30,6 +38,26 @@ public class HeaderPage extends AbstractPage {
 			waitForElementByCssLocator(menRadioButtonLocator).click();
 		} else if (gender.contentEquals("women")) {
 			waitForElementByCssLocator(womenRadioButtonLocator).click();
+		}
+	}
+
+	public void selectSection(String section) {
+		waitForPageToLoad();
+		if (section.equals("men")) {
+			waitForElementByCssLocator(menSectionLocator).click();
+		} else if (section.equals("women")) {
+			waitForElementByCssLocator(womenSectionLocator).click();
+		}
+	}
+
+	public void selectMenuOption(String menuOption) {
+		waitForPageToLoad();
+		List<WebElement> menuOptionList = driver.findElements(By.cssSelector(menuOptionLocator));
+		for (WebElement itemNow : menuOptionList) {
+			if (itemNow.getText().contains(menuOption)) {
+				itemNow.click();
+				break;
+			}
 		}
 	}
 

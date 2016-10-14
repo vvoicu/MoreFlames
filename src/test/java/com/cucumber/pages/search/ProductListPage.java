@@ -26,6 +26,8 @@ public class ProductListPage extends ProductDetailsPage {
 	private String itemUrlLocator = "a[title]";
 
 	private String nextButtonsLocator = ".redefine__right__pager > li.next a";
+	
+	private String errorLocator = ".slp__header";
 
 	public List<SearchProductModel> grabSearchProductsList() {
 		waitForPageToLoad();
@@ -136,6 +138,18 @@ public class ProductListPage extends ProductDetailsPage {
 			Assert.assertTrue("The product details is not correct", itemNow.getDetails().trim().contains(details));
 			Assert.assertTrue("The product price is not correct", itemNow.getPrice().contains(price));
 		}
+	}
+	
+	public void verifyTheErrorMessage(String searachTerm){
+		boolean found = true;
+		String errorMessage = "We searched and found nothing for\n" + " "+ searachTerm + "\n"  + "Please search again";
+		System.out.println(errorMessage);
+		WebElement errorContainer = driver.findElement(By.cssSelector(errorLocator));
+		System.out.println(errorContainer.getText());
+		if(!errorContainer.getText().trim().contains(errorMessage)){
+			found = false;
+		}
+		Assert.assertTrue("The error message isn't displayed", found);
 	}
 
 }
