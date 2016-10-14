@@ -8,10 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.cucumber.pages.AbstractPage;
+import com.cucumber.pages.product.ProductDetailsPage;
 import com.tools.data.search.SearchProductModel;
 
-public class ProductListPage extends AbstractPage {
+public class ProductListPage extends ProductDetailsPage {
 
 	public ProductListPage(WebDriver driver) {
 		super(driver);
@@ -20,9 +20,9 @@ public class ProductListPage extends AbstractPage {
 	private String listItemsLocator = ".lister__wrapper .lister__item";
 	private String productsListLocator = "ul.lister__wrapper li div.lister__item__inner";
 
-	private String itemTitleLocator = "div.lister__item__title";
+	private String itemDesignerNameLocator = "div.lister__item__title";
 	private String itemDetailsLocator = "a div.lister__item__details";
-	private String itemPriceLocator = "a div.lister__item__details";
+	private String itemPriceLocator = "a div.lister__item__price";
 	private String itemUrlLocator = "a[title]";
 
 	private String nextButtonsLocator = ".redefine__right__pager > li.next a";
@@ -36,7 +36,7 @@ public class ProductListPage extends AbstractPage {
 			SearchProductModel itemNow = new SearchProductModel();
 			itemNow.setDetails(webElement.findElement(By.cssSelector(itemDetailsLocator)).getText());
 			itemNow.setPrice(webElement.findElement(By.cssSelector(itemPriceLocator)).getText());
-			itemNow.setTitle(webElement.findElement(By.cssSelector(itemTitleLocator)).getText());
+			itemNow.setTitle(webElement.findElement(By.cssSelector(itemDesignerNameLocator)).getText());
 			itemNow.setUrl(webElement.findElement(By.cssSelector(itemUrlLocator)).getAttribute("href"));
 			resultList.add(itemNow);
 		}
@@ -97,7 +97,7 @@ public class ProductListPage extends AbstractPage {
 		boolean found = true;
 		List<WebElement> productList = getProductsList();
 		for (WebElement product : productList)
-			if (!product.findElement(By.cssSelector(itemTitleLocator)).getText().contains(designer)) {
+			if (!product.findElement(By.cssSelector(itemDesignerNameLocator)).getText().contains(designer)) {
 				found = false;
 				break;
 			}
@@ -110,7 +110,31 @@ public class ProductListPage extends AbstractPage {
 			Assert.assertTrue("More than one product found for the same code", productList.size() > 1);
 		} else {
 			for (WebElement product : productList)
-				product.findElement(By.cssSelector(itemTitleLocator)).click();
+				product.findElement(By.cssSelector(itemDesignerNameLocator)).click();
+		}
+	}
+
+	public void verifyUniqueProduct() {
+		List<WebElement> productList = getProductsList();
+		if (productList.size() > 1) {
+			Assert.assertTrue("More than one product found for the same code", productList.size() > 1);
+		}
+	}
+
+	public void verifyItemDescriptionInProductListPage(String title, String details, String price) {
+
+		List<SearchProductModel> products = grabSearchProductsList();
+		for (SearchProductModel itemNow : products) {
+			System.out.println("Expected: details- " + itemNow.getDetails() + "---");
+			System.out.println("Actual: details- " + details + "---");
+			System.out.println("Expected: title- " + itemNow.getTitle() + "---");
+			System.out.println("Actual: title- " + title + "---");
+			System.out.println("Expected: price- " + itemNow.getPrice() + "---");
+			System.out.println("Actual: price- " + price + "---");
+
+			Assert.assertTrue("The product title is not correct", itemNow.getTitle().contains(title));
+			Assert.assertTrue("The product details is not correct", itemNow.getDetails().trim().contains(details));
+			Assert.assertTrue("The product price is not correct", itemNow.getPrice().contains(price));
 		}
 	}
 

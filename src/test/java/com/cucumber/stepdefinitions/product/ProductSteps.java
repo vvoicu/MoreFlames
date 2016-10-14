@@ -23,6 +23,7 @@ public class ProductSteps {
 	public ProductSteps() {
 		productListPage = new ProductListPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
+
 	}
 
 	@Given("selects the product '(.*)'")
@@ -69,6 +70,12 @@ public class ProductSteps {
 	public void displayedProductCodeTitleDetailsAndPrice(String code, String title, String details, String price) throws Throwable {
 		productListPage.verifyUniqueAndOpenProduct();
 		productDetailsPage.verifyProductDetails(code, title, details, price);
+	}
+
+	@Then("the displayed product should have title: '(.*)', details: '(.*)', price '(.*)'")
+	public void theDisplayedProductDescriptions(String title, String details, String price) throws Throwable {
+		productListPage.verifyUniqueProduct();
+		productListPage.verifyItemDescriptionInProductListPage(title, details, price);
 	}
 
 }
