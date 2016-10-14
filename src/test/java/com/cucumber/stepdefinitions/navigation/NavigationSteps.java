@@ -1,6 +1,7 @@
 package com.cucumber.stepdefinitions.navigation;
 
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 
@@ -46,21 +47,20 @@ public class NavigationSteps {
 		
 	}
 	
-	@And("click the items")
-	public void clickTheItems(List<String> items, List<String> pageNames){
-		for (String string : items) {
-			headerPage.selectMenuOption(string);
+	@And("click the items and verify the pageUrls")
+	public void clickTheItems(Map<String, String> items){
+		for (String itemKey : items.keySet()) {
+			System.out.println("key: " + itemKey);
+			System.out.println("value: " + items.get(itemKey));
+			headerPage.selectMenuOption(itemKey);
+			headerPage.verifyTheUrlPage(items.get(itemKey));
 		}
+		
 	}
 	
 	@Then("select the '(.*)' option")
 	public void givenTheUserSelectsTheSpecificSection(String section){
 		headerPage.selectSection(section);
-	}
-	
-	@Given("click the '(.*)'")
-	public void givenTheUserSelectsAMenuOption(String menuOption){
-		headerPage.selectMenuOption(menuOption);
 	}
 
 	@When("the user goes to cart")

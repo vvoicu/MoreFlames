@@ -3,6 +3,7 @@ package com.cucumber.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,10 +58,22 @@ public class HeaderPage extends AbstractPage {
 		for(WebElement itemNow : menuOptionList){
 			if(itemNow.getText().contains(menuOption)){
 				itemNow.click();
+				waitForPageToLoad();
 				break;
 			}
 		}
 	}
+	
+	public void verifyTheUrlPage(String url){
+		boolean found = true;
+		String pageURL = driver.getCurrentUrl().toString();
+		System.out.println(driver.getCurrentUrl().toString());
+		if(!pageURL.contains(url)){
+			found = false;
+		}
+		Assert.assertTrue("The page isn't loaded correctly", found);
+	}
+	
 
 	public void typeSearchValue(String searchValue) {
 		waitForElementByCssLocator(searchInputLocator).sendKeys(searchValue);
