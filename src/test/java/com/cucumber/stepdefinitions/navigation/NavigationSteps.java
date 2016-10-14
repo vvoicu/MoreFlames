@@ -1,8 +1,7 @@
 package com.cucumber.stepdefinitions.navigation;
 
 import java.util.List;
-
-import org.openqa.selenium.WebDriver;
+import java.util.Map;
 
 import com.cucumber.pages.AbstractPage;
 import com.cucumber.pages.HeaderPage;
@@ -21,14 +20,12 @@ import cucumber.api.java.en.When;
  *
  */
 public class NavigationSteps {
-
-	public WebDriver driver = new WebDriverCore().getDriver();
 	public HeaderPage headerPage;
 	public AbstractPage abstractPage;
 
-	public NavigationSteps() {
-		abstractPage = new AbstractPage(driver);
-		headerPage = new HeaderPage(driver);
+	public NavigationSteps(WebDriverCore driver) {
+		abstractPage = new AbstractPage(driver.getDriver());
+		headerPage = new HeaderPage(driver.getDriver());
 	}
 
 	@Given("the user is in home page")
@@ -44,22 +41,36 @@ public class NavigationSteps {
 		headerPage.submitSearch();
 
 	}
+	
+	@And("click the items and verify the pageUrls")
+	public void clickTheItems(Map<String, String> items){
+		for (String itemKey : items.keySet()) {
+			System.out.println("key: " + itemKey);
+			System.out.println("value: " + items.get(itemKey));
+			headerPage.selectMenuOption(itemKey);
+			headerPage.verifyTheUrlPage(items.get(itemKey));
+		}
+	}
 
 	@And("click the items")
 	public void clickTheItems(List<String> items, List<String> pageNames) {
 		for (String string : items) {
 			headerPage.selectMenuOption(string);
+
 		}
+		
 	}
 
 	@Then("select the '(.*)' option")
 	public void givenTheUserSelectsTheSpecificSection(String section) {
 		headerPage.selectSection(section);
+
 	}
 
 	@Given("click the '(.*)'")
 	public void givenTheUserSelectsAMenuOption(String menuOption) {
 		headerPage.selectMenuOption(menuOption);
+
 	}
 
 	@When("the user goes to cart")

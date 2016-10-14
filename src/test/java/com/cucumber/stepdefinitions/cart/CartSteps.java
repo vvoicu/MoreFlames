@@ -1,7 +1,5 @@
 package com.cucumber.stepdefinitions.cart;
 
-import org.openqa.selenium.WebDriver;
-
 import com.cucumber.pages.checkout.CartPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.CartCalculations;
@@ -12,12 +10,10 @@ import com.tools.Validations;
 import cucumber.api.java.en.Then;
 
 public class CartSteps {
-
-	public WebDriver driver = new WebDriverCore().getDriver();
 	public CartPage cartPage;
 	
-	public CartSteps(){
-		cartPage = new CartPage(driver);
+	public CartSteps(WebDriverCore driver) {
+		cartPage = new CartPage(driver.getDriver());
 	}
 	
 	@Then("the products should be correctly displayed")
