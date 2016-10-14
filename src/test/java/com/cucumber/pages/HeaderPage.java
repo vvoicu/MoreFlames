@@ -1,6 +1,5 @@
 package com.cucumber.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -23,7 +22,7 @@ public class HeaderPage extends AbstractPage {
 	private String searchSubmitButtonLocator = "#searchSubmit";
 	private String menSectionLocator = "span.men";
 	private String womenSectionLocator = "span.women";
-	
+
 	private String menuOptionLocator = "div#nav_main .main-menu__wrapper>li";
 
 	public void expandSearch() {
@@ -42,8 +41,8 @@ public class HeaderPage extends AbstractPage {
 			waitForElementByCssLocator(womenRadioButtonLocator).click();
 		}
 	}
-	
-	public void selectSection(String section){
+
+	public void selectSection(String section) {
 		waitForPageToLoad();
 		if (section.equals("men")) {
 			waitForElementByCssLocator(menSectionLocator).click();
@@ -51,12 +50,12 @@ public class HeaderPage extends AbstractPage {
 			waitForElementByCssLocator(womenSectionLocator).click();
 		}
 	}
-	
-	public void selectMenuOption(String menuOption){
+
+	public void selectMenuOption(String menuOption) {
 		waitForPageToLoad();
 		List<WebElement> menuOptionList = driver.findElements(By.cssSelector(menuOptionLocator));
-		for(WebElement itemNow : menuOptionList){
-			if(itemNow.getText().contains(menuOption)){
+		for (WebElement itemNow : menuOptionList) {
+			if (itemNow.getText().contains(menuOption)) {
 				itemNow.click();
 				waitForPageToLoad();
 				break;

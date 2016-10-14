@@ -23,6 +23,7 @@ public class ProductSteps {
 	public ProductSteps() {
 		productListPage = new ProductListPage(driver);
 		productDetailsPage = new ProductDetailsPage(driver);
+
 	}
 
 	@Given("selects the product '(.*)'")
@@ -74,6 +75,12 @@ public class ProductSteps {
 	@Then("an error message containing '(.*)' is displayed")
 	public void verifyTheErrorMessage(String serachTerm){
 		productListPage.verifyTheErrorMessage(serachTerm);
+	}
+
+	@Then("the displayed product should have title: '(.*)', details: '(.*)', price '(.*)'")
+	public void theDisplayedProductDescriptions(String title, String details, String price) throws Throwable {
+		productListPage.verifyUniqueProduct();
+		productListPage.verifyItemDescriptionInProductListPage(title, details, price);
 	}
 
 }
