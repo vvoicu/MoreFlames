@@ -70,5 +70,10 @@ public class ProductSteps {
 		productListPage.verifyUniqueAndOpenProduct();
 		productDetailsPage.verifyProductDetails(code, title, details, price);
 	}
+	
+	@Then("an error message containing '(.*)' is displayed")
+	public void verifyTheErrorMessage(String serachTerm){
+		productListPage.verifyTheErrorMessage(serachTerm);
+	}
 
 }
