@@ -49,7 +49,17 @@ public class ProductSteps {
 
 	@Then("the displayed products details should contain the '(.*)'")
 	public void verifyTheCategoryOfTheDisplayedProducts(String category) {
-		productListPage.verifyProductCategory(category);
+		boolean found = true;
+		List<SearchProductModel> products = productListPage.grabProductsInAllPages(category);
+		System.out.println(products.size());
+		for (SearchProductModel itemNow : products) {
+			if (!itemNow.getDetails().contains(category)) {
+				found = false;
+				System.out.println(itemNow.getDetails());
+				break;
+			}
+		}
+		Assert.assertTrue("Search result doesn't matched search criteria", found);
 	}
 
 	@Then("^all the products are displayed$")
@@ -71,9 +81,9 @@ public class ProductSteps {
 		productListPage.verifyUniqueAndOpenProduct();
 		productDetailsPage.verifyProductDetails(code, title, details, price);
 	}
-	
+
 	@Then("an error message containing '(.*)' is displayed")
-	public void verifyTheErrorMessage(String serachTerm){
+	public void verifyTheErrorMessage(String serachTerm) {
 		productListPage.verifyTheErrorMessage(serachTerm);
 	}
 
@@ -83,4 +93,8 @@ public class ProductSteps {
 		productListPage.verifyItemDescriptionInProductListPage(title, details, price);
 	}
 
+	@Then("verify item category in product details list page: '(.*)'")
+	public void theDisplayedProductDetails(String details) throws Throwable {
+		productListPage.verifyItemDetailsInProductListPage(details);
+	}
 }

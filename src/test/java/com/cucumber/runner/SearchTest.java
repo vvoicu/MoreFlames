@@ -16,7 +16,7 @@ import cucumber.api.junit.Cucumber;
  *
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/search/SearchUsingInvalidCharacters.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = {
+@CucumberOptions(features = { "src/test/resources/features/search/filter/CategoryFilterBy.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = {
 		"com.cucumber.listener.ExtentCucumberFormatter" })
 public class SearchTest {
 
