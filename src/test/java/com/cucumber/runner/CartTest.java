@@ -17,7 +17,7 @@ import cucumber.api.junit.Cucumber;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsFrInCart.feature" }, glue = {
-		"com.cucumber.stepdefinitions" }, plugin = { "com.cucumber.listener.ExtentCucumberFormatter" })
+		"com.cucumber.stepdefinitions" }, plugin = { "com.cucumber.listener.ExtentCucumberFormatter" }, format = {"html:target/cucumber"})
 public class CartTest {
 
 	@BeforeClass
@@ -38,8 +38,9 @@ public class CartTest {
 	}
 	
 	private static void setEnvironmentVariables(){
-		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver");
-		System.setProperty("browser.type", "Firefox");
+		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver");
+		System.setProperty("browser.type", "chrome");
 		System.getProperty("webdriver.chrome.path");
 	}
 
