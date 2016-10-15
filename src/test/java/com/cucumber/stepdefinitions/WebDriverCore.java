@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 
+import com.tools.mongo.MongoConnector;
+
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -14,12 +16,16 @@ import cucumber.api.java.Before;
 public class WebDriverCore {
 	private static boolean initialized = false;
 	private WebDriver driver;
+	private String scenario;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(Scenario scenario) throws Exception {
+		System.out.println(scenario.getName());
+		System.out.println(scenario.getSourceTagNames());
+		
 		if (!initialized) {
-
 			initialized = true;
+			this.scenario = scenario.getName();
 			String webdriverDriver = System.getProperty("browser.type");
 			if (webdriverDriver != null
 					&& webdriverDriver.toLowerCase().contains("chrome")) {
@@ -33,6 +39,10 @@ public class WebDriverCore {
 
 	public WebDriver getDriver() {
 		return driver;
+	}
+	
+	public String getScenario(){
+		return scenario;
 	}
 
 	@After
@@ -54,5 +64,7 @@ public class WebDriverCore {
 		}
 		driver.close();
 		driver.quit();
+		
+		MongoConnector.deleteAllDbs();
 	}
 }

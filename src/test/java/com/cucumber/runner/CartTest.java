@@ -1,11 +1,15 @@
 package com.cucumber.runner;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import com.cucumber.listener.ExtentCucumberFormatter;
+//import com.cucumber.listener.ExtentCucumberFormatter;
+
+import com.sitture.ExtentFormatter;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -13,35 +17,36 @@ import cucumber.api.junit.Cucumber;
 /**
  * The reporting class will initialize some properties that will be displayed in
  * the extent report
- *
+ * 
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsFrInCart.feature" }, glue = {
-		"com.cucumber.stepdefinitions" }, plugin = { "com.cucumber.listener.ExtentCucumberFormatter" }, format = {"html:target/cucumber"})
+@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsFrInCart.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = { "com.sitture.ExtentFormatter" })
 public class CartTest {
 
 	@BeforeClass
 	public static void setup() {
-		ExtentCucumberFormatter.initiateExtentCucumberFormatter();
-		ExtentCucumberFormatter.loadConfig(new File("src/test/resources/extent-config.xml"));
-		setEnvironmentVariables();
-		ExtentCucumberFormatter.addSystemInfo("Browser Name", System.getProperty("browser.type"));
-		ExtentCucumberFormatter.addSystemInfo("Selenium version", "v2.53.0");
 
-//		Map<String, String> systemInfo = new HashMap<String, String>();
-//		systemInfo.put("Cucumber version", "v1.2.3");
-//		systemInfo.put("Extent Cucumber Reporter version", "v1.1.0");
-//		ExtentCucumberFormatter.addSystemInfo(systemInfo);
-		
-//		Injector injector = Guice.createInjector(new DriverModule());
-//		WebDriverFirerox webDriverCore = injector.getInstance(WebDriverFirerox.class);
+		ExtentFormatter.initiateExtentFormatter();
+
+		ExtentFormatter.loadConfig(new File(
+				"src/test/resources/extent-config.xml"));
+
+		// ExtentFormatter.addSystemInfo("Browser", "Chrome");
+		ExtentFormatter.addSystemInfo("Selenium", "v2.53.1");
+
+		Map<String, String> systemInfo = new HashMap<String, String>();
+		systemInfo.put("Cucumber", "v1.2.5");
+		systemInfo.put("Extent Reports", "v2.41.1");
+		ExtentFormatter.addSystemInfo(systemInfo);
 	}
-	
-	private static void setEnvironmentVariables(){
-		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver.exe");
-//		System.setProperty("webdriver.chrome.driver", "resources" + File.separator + "chromedriver");
-		System.setProperty("browser.type", "chrome");
-		System.getProperty("webdriver.chrome.path");
-	}
+
+	// private static void setEnvironmentVariables(){
+	// System.setProperty("webdriver.chrome.driver", "resources" +
+	// File.separator + "chromedriver.exe");
+	// // System.setProperty("webdriver.chrome.driver", "resources" +
+	// File.separator + "chromedriver");
+	// System.setProperty("browser.type", "chrome");
+	// System.getProperty("webdriver.chrome.path");
+	// }
 
 }
