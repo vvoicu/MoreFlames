@@ -27,7 +27,6 @@ public class NavigationSteps {
 	public String deviceType;
 
 	public NavigationSteps(WebDriverCore driver) {
-
 		deviceType = driver.getDeviceType();
 //		System.out.println("DEVICE: " + deviceType);
 		//desktop pages

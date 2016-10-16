@@ -45,9 +45,7 @@ public class WebDriverCore {
 					&& deviceType.toLowerCase().contains("mobile")) {
 				driver.manage().window().setSize(Constants.DEVICE_SIZE);
 			} else {
-//				driver.manage().window().maximize();
-
-				driver.manage().window().setSize(Constants.DEVICE_SIZE);
+				driver.manage().window().maximize();
 			}
 		}
 	}

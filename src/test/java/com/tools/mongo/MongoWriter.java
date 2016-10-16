@@ -17,5 +17,4 @@ public class MongoWriter extends MongoConnector{
 		MongoCollection<Document> table = connectToDB(name).getCollection("CartTotalModel");
 		table.insertOne(cartTotalModel.toDocument());
 	}
-
 }

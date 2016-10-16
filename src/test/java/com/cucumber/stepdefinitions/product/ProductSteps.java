@@ -59,7 +59,6 @@ public class ProductSteps {
 			searchList.addAll(productListPage.grabSearchProductsList());
 		}
 		System.out.println("All products: " + searchList.size());
-
 	}
 
 	@Then("the displayed product should have code: '(.*)', title: '(.*)', details: '(.*)', price '(.*)'")
