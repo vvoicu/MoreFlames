@@ -1,4 +1,4 @@
-package com.cucumber.pages.search;
+package com.cucumber.pages.desktop.search;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.cucumber.pages.product.ProductDetailsPage;
+import com.cucumber.pages.desktop.product.ProductDetailsPage;
 import com.tools.data.search.SearchProductModel;
 
 public class ProductListPage extends ProductDetailsPage {

@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import com.cucumber.pages.product.ProductDetailsPage;
-import com.cucumber.pages.search.ProductListPage;
+import com.cucumber.pages.desktop.product.ProductDetailsPage;
+import com.cucumber.pages.desktop.search.ProductListPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.data.search.SearchProductModel;
 

@@ -7,7 +7,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 
+import com.tools.Constants;
 import com.tools.mongo.MongoConnector;
+import com.tools.utils.ConfigUtils;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -22,26 +24,36 @@ public class WebDriverCore {
 	public void setUp(Scenario scenario) throws Exception {
 		System.out.println(scenario.getName());
 		System.out.println(scenario.getSourceTagNames());
-		
+
 		if (!initialized) {
 			initialized = true;
 			this.scenario = scenario.getName();
-			String webdriverDriver = System.getProperty("browser.type");
+			String webdriverDriver = System
+					.getProperty(Constants.BROWSER_TYPE_KEY);
 			if (webdriverDriver != null
 					&& webdriverDriver.toLowerCase().contains("chrome")) {
 				driver = new ChromeDriver();
 			} else {
 				driver = new FirefoxDriver();
 			}
-			driver.manage().window().maximize();
+
+			String deviceType = ConfigUtils.getDeviceType();
+//			String deviceType = System.getProperty(Constants.DEVICE_TYPE_KEY);
+
+			if (deviceType != null && !deviceType.isEmpty()
+					&& deviceType.toLowerCase().contains("mobile")) {
+				driver.manage().window().setSize(Constants.DEVICE_SIZE);
+			} else {
+				driver.manage().window().maximize();
+			}
 		}
 	}
 
 	public WebDriver getDriver() {
 		return driver;
 	}
-	
-	public String getScenario(){
+
+	public String getScenario() {
 		return scenario;
 	}
 
@@ -64,7 +76,7 @@ public class WebDriverCore {
 		}
 		driver.close();
 		driver.quit();
-		
+
 		MongoConnector.deleteAllDbs();
 	}
 }

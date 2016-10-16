@@ -1,4 +1,4 @@
-package com.cucumber.pages.checkout;
+package com.cucumber.pages.desktop.checkout;
 
 import java.util.List;
 

@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.cucumber.pages.AbstractPage;
-import com.cucumber.pages.HeaderPage;
+import com.cucumber.pages.desktop.HeaderPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
-import com.tools.Constants;
+import com.tools.utils.ConfigUtils;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -28,7 +28,7 @@ public class NavigationSteps {
 
 	@Given("the user is in home page")
 	public void givenTheUserIsOnTheHomePage() {
-		abstractPage.navigateTo(Constants.BASE_URL);
+		abstractPage.navigateTo(ConfigUtils.getBaseUrl());
 	}
 
 	@Given("searches for '(.*)' in '(.*)' section")

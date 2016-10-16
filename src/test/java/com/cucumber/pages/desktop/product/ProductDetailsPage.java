@@ -1,4 +1,4 @@
-package com.cucumber.pages.product;
+package com.cucumber.pages.desktop.product;
 
 import java.util.List;
 

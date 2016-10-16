@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 //import com.cucumber.listener.ExtentCucumberFormatter;
 
 import com.sitture.ExtentFormatter;
+import com.tools.Constants;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -28,8 +29,8 @@ public class CartTest {
 
 		ExtentFormatter.initiateExtentFormatter();
 
-		ExtentFormatter.loadConfig(new File(
-				"src/test/resources/extent-config.xml"));
+		ExtentFormatter.loadConfig(new File(Constants.RESOURCES_PATH
+				+ "extent-config.xml"));
 
 		// ExtentFormatter.addSystemInfo("Browser", "Chrome");
 		ExtentFormatter.addSystemInfo("Selenium", "v2.53.1");
