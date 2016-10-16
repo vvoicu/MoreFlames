@@ -19,6 +19,7 @@ public class WebDriverCore {
 	private static boolean initialized = false;
 	private WebDriver driver;
 	private String scenario;
+	private String deviceType;
 
 	@Before
 	public void setUp(Scenario scenario) throws Exception {
@@ -37,14 +38,16 @@ public class WebDriverCore {
 				driver = new FirefoxDriver();
 			}
 
-			String deviceType = ConfigUtils.getDeviceType();
+			deviceType = ConfigUtils.getDeviceType();
 //			String deviceType = System.getProperty(Constants.DEVICE_TYPE_KEY);
 
 			if (deviceType != null && !deviceType.isEmpty()
 					&& deviceType.toLowerCase().contains("mobile")) {
 				driver.manage().window().setSize(Constants.DEVICE_SIZE);
 			} else {
-				driver.manage().window().maximize();
+//				driver.manage().window().maximize();
+
+				driver.manage().window().setSize(Constants.DEVICE_SIZE);
 			}
 		}
 	}
@@ -55,6 +58,10 @@ public class WebDriverCore {
 
 	public String getScenario() {
 		return scenario;
+	}
+	
+	public String getDeviceType(){
+		return deviceType;
 	}
 
 	@After

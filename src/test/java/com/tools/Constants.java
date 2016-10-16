@@ -17,7 +17,8 @@ public class Constants {
 	//webdriver browser setup
 	public static final String BROWSER_TYPE_KEY = "browser.type";
 	public static final String DEVICE_TYPE_KEY = "device.type";
-	public static final Dimension DEVICE_SIZE = new Dimension(768, 1280);
+	public static final Dimension DEVICE_SIZE = new Dimension(750, 1334);
+//	public static final Dimension DEVICE_SIZE = new Dimension(650, 1070);
 //	public static final Dimension DEVICE_SIZE = new Dimension(1080, 1920);
 	
 	//webdriver timeouts
