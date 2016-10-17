@@ -1,4 +1,4 @@
-package com.cucumber.stepdefinitions.filter;
+package com.cucumber.stepdefinitions.search.filter;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;

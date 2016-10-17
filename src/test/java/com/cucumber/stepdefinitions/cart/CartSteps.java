@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import com.cucumber.pages.desktop.checkout.CartPage;
+import com.cucumber.pages.desktop.cart.CartPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.CartCalculations;
 import com.tools.Constants;
