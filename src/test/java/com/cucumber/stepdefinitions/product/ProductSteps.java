@@ -89,7 +89,7 @@ public class ProductSteps {
 		productListPage.verifyItemDescriptionInProductListPage(title, details, price);
 	}
 
-	@Then("verify item category in product details list page: '(.*)'")
+	@Then("the items details in product list page is: '(.*)'")
 	public void theDisplayedProductDetails(String details) throws Throwable {
 		productListPage.verifyItemDetailsInProductListPage(details);
 	}
