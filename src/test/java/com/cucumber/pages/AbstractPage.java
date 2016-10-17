@@ -27,7 +27,6 @@ public class AbstractPage {
 	/**
 	 * Wait for document ready state for {@link Constants}.PAGE_LOAD_MAX_RETRY
 	 * time.
-	 * 
 	 */
 	protected void waitForPageToLoad() {
 		int retry = 0;

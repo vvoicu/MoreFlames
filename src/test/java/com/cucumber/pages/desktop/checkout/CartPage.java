@@ -1,4 +1,4 @@
-package com.cucumber.pages.checkout;
+package com.cucumber.pages.desktop.checkout;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.cucumber.pages.AbstractPage;
-import com.tools.CartDataHandler;
 import com.tools.Constants;
 import com.tools.data.cart.CartProductModel;
 import com.tools.data.cart.CartTotalModel;
+import com.tools.mongo.MongoWriter;
 import com.tools.utils.FormatterUtils;
 
 public class CartPage extends AbstractPage {
@@ -33,10 +33,12 @@ public class CartPage extends AbstractPage {
 			product.setName(nameAndCode[0].trim());
 			product.setCode(nameAndCode[1].replace(")", "").trim());
 
-			WebElement sizeElement = item.findElement(By.cssSelector("div.items-list-row__size div.data-variantDD-container"));
+			WebElement sizeElement = item.findElement(By.cssSelector(".items-list-row__size .product-sizes"));
+//			WebElement sizeElement = item.findElement(By.cssSelector("div.items-list-row__size div.data-variantDD-container"));
 
-			product.setSize(sizeElement.getText().contains(Constants.ONE_SIZE) ? Constants.ONE_SIZE
-					: sizeElement.findElement(By.cssSelector("span.cs__selected.default-opt")).getText().trim());
+			String size = sizeElement.getText().trim();
+//			String size = sizeElement.findElement(By.cssSelector("span.cs__selected.default-opt")).getText().trim();
+			product.setSize(size);
 
 			product.setQuantity(item.findElement(By.cssSelector("#quantity option[selected='selected']")).getText());
 
@@ -46,7 +48,7 @@ public class CartPage extends AbstractPage {
 			String itemPrice = item.findElement(By.cssSelector("div.items-list-row__item-price p.price")).getText().trim();
 			product.setAskingPrice(FormatterUtils.parseValue(itemPrice, 2));
 
-			CartDataHandler.grabbedProductList.add(product);
+			MongoWriter.writeCartProductModel(Constants.EXTRACTED_DATA, product);
 		}
 	}
 
@@ -63,6 +65,6 @@ public class CartPage extends AbstractPage {
 				total.setTotal(FormatterUtils.parseValue(element.findElement(By.cssSelector("td:last-child")).getText(), 2));
 			}
 		}
-		CartDataHandler.grabbedtotal = total;
+		MongoWriter.writeCartTotalModel(Constants.EXTRACTED_DATA, total);
 	}
 }

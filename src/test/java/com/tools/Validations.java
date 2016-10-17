@@ -1,67 +1,8 @@
 package com.tools;
 
-import java.util.List;
-
 import org.junit.Assert;
 
-import com.tools.data.cart.CartProductModel;
-import com.tools.utils.PrintUtils;
-
 public class Validations {
-
-	public static void validateProducts() {
-		PrintUtils.printCartProductModelList(CartDataHandler.addedProductList);
-		PrintUtils.printCartProductModelList(CartDataHandler.grabbedProductList);
-
-		for (CartProductModel productNow : CartDataHandler.addedProductList) {
-			CartProductModel compared = findProduct(productNow.getCode(), CartDataHandler.grabbedProductList);
-
-			if (compared.getName() != null) {
-				validateName(productNow.getName(), compared.getName());
-				validateSize(productNow.getSize(), compared.getSize());
-				validateQuantity(productNow.getQuantity(), compared.getQuantity());
-				validateUnitPrice(productNow.getUnitPrice(), compared.getUnitPrice());
-				validateQuantity(productNow.getAskingPrice(), compared.getAskingPrice());
-			} else {
-				Assert.assertTrue("Failure: Could not validate all products in the list", compared != null);
-			}
-
-			int index = CartDataHandler.grabbedProductList.indexOf(compared);
-			if (index > -1) {
-				CartDataHandler.grabbedProductList.remove(index);
-			}
-		}
-		Assert.assertTrue("Failure: Not all products have been validated . ", CartDataHandler.grabbedProductList.size() == 0);
-
-	}
-
-	/**
-	 * Helper method used in validate products.
-	 * 
-	 * @param productCode
-	 * @param cartProducts
-	 * @return
-	 */
-	public static CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
-		CartProductModel result = new CartProductModel();
-		theFor: for (CartProductModel cartProductModel : cartProducts) {
-			if (cartProductModel.getCode().contains(productCode)) {
-				result = cartProductModel;
-				break theFor;
-			}
-		}
-		return result;
-	}
-
-	public static void verifyTotals() {
-		PrintUtils.printCartTotalModel(CartDataHandler.calculatedtotal);
-		PrintUtils.printCartTotalModel(CartDataHandler.grabbedtotal);
-
-		validateUnitTotal(CartDataHandler.calculatedtotal.getUnitTotal(), CartDataHandler.grabbedtotal.getUnitTotal());
-		validateDelivery(CartDataHandler.calculatedtotal.getDelivery(), CartDataHandler.grabbedtotal.getDelivery());
-		validateTotal(CartDataHandler.calculatedtotal.getTotal(), CartDataHandler.grabbedtotal.getTotal());
-
-	}
 
 	public static void validateQuantity(String productNow, String compare) {
 		Assert.assertTrue("Failure: Quantity doesn't match: " + productNow + " - " + compare, productNow.contentEquals(compare));

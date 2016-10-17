@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import com.cucumber.pages.product.ProductDetailsPage;
-import com.cucumber.pages.search.ProductListPage;
+import com.cucumber.pages.desktop.product.ProductDetailsPage;
+import com.cucumber.pages.desktop.search.ProductListPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.data.search.SearchProductModel;
 
@@ -45,17 +45,8 @@ public class ProductSteps {
 
 	@Then("the displayed products details should contain the '(.*)'")
 	public void verifyTheCategoryOfTheDisplayedProducts(String category) {
-		boolean found = true;
-		List<SearchProductModel> products = productListPage.grabProductsInAllPages(category);
-		System.out.println(products.size());
-		for (SearchProductModel itemNow : products) {
-			if (!itemNow.getDetails().contains(category)) {
-				found = false;
-				System.out.println(itemNow.getDetails());
-				break;
-			}
-		}
-		Assert.assertTrue("Search result doesn't matched search criteria", found);
+		productListPage.verifyProductCategory(category);
+
 	}
 
 	@Then("^all the products are displayed$")
@@ -69,7 +60,6 @@ public class ProductSteps {
 			searchList.addAll(productListPage.grabSearchProductsList());
 		}
 		System.out.println("All products: " + searchList.size());
-
 	}
 
 	@Then("the displayed product should have code: '(.*)', title: '(.*)', details: '(.*)', price '(.*)'")
@@ -91,6 +81,6 @@ public class ProductSteps {
 
 	@Then("the items details in product list page is: '(.*)'")
 	public void theDisplayedProductDetails(String details) throws Throwable {
-		productListPage.verifyItemDetailsInProductListPage(details);
+		productListPage.verifyProductCategory(details);
 	}
 }

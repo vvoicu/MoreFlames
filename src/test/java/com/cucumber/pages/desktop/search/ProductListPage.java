@@ -1,4 +1,4 @@
-package com.cucumber.pages.search;
+package com.cucumber.pages.desktop.search;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +46,24 @@ public class ProductListPage extends ProductDetailsPage {
 		return resultList;
 	}
 
-	public List<SearchProductModel> grabProductsInAllPages(String category) {
+	public void verifyProductCategory(String category) {
+		boolean found = true;
 		List<SearchProductModel> products = new ArrayList<SearchProductModel>();
 		products.addAll(grabSearchProductsList());
 		while (clickIfNextPresent()) {
 			products.addAll(grabSearchProductsList());
 		}
-		return products;
+		System.out.println(products.size());
+
+		for (SearchProductModel itemNow : products) {
+			if (!itemNow.getDetails().contains(category)) {
+				found = false;
+				System.out.println(itemNow.getDetails());
+				break;
+			}
+		}
+
+		Assert.assertTrue("Search result doesn't matched search criteria", found);
 	}
 
 	public boolean clickIfNextPresent() {
@@ -126,17 +137,6 @@ public class ProductListPage extends ProductDetailsPage {
 			Assert.assertTrue("The product title is not correct", itemNow.getTitle().contains(title));
 			Assert.assertTrue("The product details is not correct", itemNow.getDetails().trim().contains(details));
 			Assert.assertTrue("The product price is not correct", itemNow.getPrice().contains(price));
-		}
-	}
-
-	public void verifyItemDetailsInProductListPage(String details) {
-		List<SearchProductModel> products = grabSearchProductsList();
-		for (SearchProductModel itemNow : products) {
-			System.out.println("Expected: details- " + itemNow.getDetails() + "---");
-			System.out.println("Actual: details- " + details + "---");
-
-			Assert.assertTrue("The product details is not correct", itemNow.getDetails().trim().contains(details));
-
 		}
 	}
 
