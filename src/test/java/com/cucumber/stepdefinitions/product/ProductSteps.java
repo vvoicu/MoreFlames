@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
-import com.cucumber.pages.product.ProductDetailsPage;
-import com.cucumber.pages.search.ProductListPage;
+import com.cucumber.pages.desktop.product.ProductDetailsPage;
+import com.cucumber.pages.desktop.search.ProductListPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.data.search.SearchProductModel;
 
@@ -15,15 +14,12 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class ProductSteps {
-
-	public WebDriver driver = new WebDriverCore().getDriver();
 	public ProductListPage productListPage;
 	public ProductDetailsPage productDetailsPage;
 
-	public ProductSteps() {
-		productListPage = new ProductListPage(driver);
-		productDetailsPage = new ProductDetailsPage(driver);
-
+	public ProductSteps(WebDriverCore driver) {
+		productListPage = new ProductListPage(driver.getDriver());
+		productDetailsPage = new ProductDetailsPage(driver.getDriver());
 	}
 
 	@Given("selects the product '(.*)'")
@@ -63,7 +59,6 @@ public class ProductSteps {
 			searchList.addAll(productListPage.grabSearchProductsList());
 		}
 		System.out.println("All products: " + searchList.size());
-
 	}
 
 	@Then("the displayed product should have code: '(.*)', title: '(.*)', details: '(.*)', price '(.*)'")

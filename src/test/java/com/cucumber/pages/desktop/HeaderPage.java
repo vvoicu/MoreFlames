@@ -1,4 +1,4 @@
-package com.cucumber.pages;
+package com.cucumber.pages.desktop;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import com.cucumber.pages.AbstractPage;
 
 public class HeaderPage extends AbstractPage {
 

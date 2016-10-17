@@ -1,4 +1,4 @@
-package com.cucumber.pages.product;
+package com.cucumber.pages.desktop.product;
 
 import java.util.List;
 
@@ -10,9 +10,10 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.cucumber.pages.AbstractPage;
 import com.tools.CartCalculations;
-import com.tools.CartDataHandler;
+import com.tools.Constants;
 import com.tools.data.ProductDetailModel;
 import com.tools.data.cart.CartProductModel;
+import com.tools.mongo.MongoWriter;
 import com.tools.utils.FormatterUtils;
 
 public class ProductDetailsPage extends AbstractPage {
@@ -95,7 +96,7 @@ public class ProductDetailsPage extends AbstractPage {
 		product.setAskingPrice(String.valueOf(CartCalculations.calculateAskingPrice(product)));
 		addProductToCart();
 
-		CartDataHandler.addedProductList.add(product);
+		MongoWriter.writeCartProductModel(Constants.ADDED_DATA, product);
 	}
 
 	public String getProductCode() {

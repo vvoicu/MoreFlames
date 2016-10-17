@@ -22,13 +22,11 @@ public class AbstractPage {
 
 	public void navigateTo(String URL) {
 		driver.get(URL);
-		driver.manage().window().maximize();
 	}
 
 	/**
 	 * Wait for document ready state for {@link Constants}.PAGE_LOAD_MAX_RETRY
 	 * time.
-	 * 
 	 */
 	protected void waitForPageToLoad() {
 		int retry = 0;

@@ -1,5 +1,7 @@
 package com.tools.data.cart;
 
+import org.bson.Document;
+
 public class CartProductModel {
 
 	private String name;
@@ -8,6 +10,24 @@ public class CartProductModel {
 	private String askingPrice;
 	private String quantity;
 	private String size;
+
+	public CartProductModel() {
+		name = "";
+		code = "";
+		unitPrice = "";
+		askingPrice = "";
+		quantity = "";
+		size = "";
+	}
+
+	public CartProductModel(Document doc) {
+		name = doc.getString("name");
+		code = doc.getString("code");
+		unitPrice = doc.getString("unitPrice");
+		askingPrice = doc.getString("askingPrice");
+		quantity = doc.getString("quantity");
+		size = doc.getString("size");
+	}
 
 	public String getName() {
 		return name;
@@ -57,4 +77,23 @@ public class CartProductModel {
 		this.size = size;
 	}
 
+	public Document toDocument() {
+		Document doc = new Document();
+		doc.put("name", name);
+		doc.put("code", code);
+		doc.put("unitPrice", unitPrice);
+		doc.put("askingPrice", askingPrice);
+		doc.put("quantity", quantity);
+		doc.put("size", size);
+		return doc;
+	}
+
+	public String toString() {
+		return "{name:" + name 
+				+ ", code: " + code 
+				+ ", unitPrice: " + unitPrice 
+				+ ", askingPrice: " + askingPrice 
+				+ ", quantity: " + quantity 
+				+ ", size:" + size + "}";
+	}
 }
