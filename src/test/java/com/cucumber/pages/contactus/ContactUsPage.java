@@ -17,28 +17,28 @@ public class ContactUsPage extends AbstractPage {
 		super(driver);
 	}
 	
-	private String fisrtNameInput = ".pdp__contact-us__contact-from input#name";
-	private String surnameInput = ".pdp__contact-us__contact-from input#last-name";
-	private String emailInput = ".pdp__contact-us__contact-from input#email";
-	private String phoneInput = ".pdp__contact-us__contact-from input#phone";
+	private String fisrtNameInput = " input#name";
+	private String surnameInput = "input#last-name";
+	private String emailInput = "input#email";
+	private String phoneInput = "input#phone";
 	private String countryDropDown = "#countrySelect span.cs__selected";
 	private String enquiryDropDown = "#typeOfEnquiry span.cs__selected";
-	private String subjectInput = ".pdp__contact-us__contact-from input#subject";
-	private String messageInput = ".pdp__contact-us__contact-from textarea[name='description']";
+	private String subjectInput = "input#subject";
+	private String messageInput = "textarea[name='description']";
 	
 	private String radioContactByEmail = "label[for='contactByEmail_sg']";
 	private String radioContactByPhone = "label[for='contactByPhone_sg']";
 	
 	private String submitButton = ".pdp__contact-us__contact-from #sfSubmitButton";
 	
-	private String formContainerLocator = "div.pdp__contact-us__contact-from div.contact-form";
+	private String formContainerLocator = "div[class=contact-form]";
 	private String productContainerLocator = "div.wrapper .pdp__contact-us__product";
 	
 	private String productTitle = ".pdp__contact-us__product__designer";
 	private String productDetails = ".pdp__contact-us__product__name";
 	private String productPrice = ".pdp__contact-us__product__price";
 	private String productCode = ".pdp__contact-us__product__code";
-	private String producteSize = "span.cs__selected.valid";
+	private String productSize = "span.cs__selected.valid";
 	
 	public ContactUsFormModel grabContactUsForm(){
 		waitForPageToLoad();
@@ -65,6 +65,7 @@ public class ContactUsPage extends AbstractPage {
 		productDetailModel.setDetails(productDetailsList.findElement(By.cssSelector(productDetails)).getText());
 		productDetailModel.setPrice(productDetailsList.findElement(By.cssSelector(productPrice)).getText());
 		productDetailModel.setCode(productDetailsList.findElement(By.cssSelector(productCode)).getText());
+		productDetailModel.setSize(productDetailsList.findElement(By.cssSelector(productSize)).getText());
 		
 		return productDetailModel;
 	}
