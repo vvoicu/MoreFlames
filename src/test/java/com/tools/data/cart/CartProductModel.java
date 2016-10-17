@@ -29,6 +29,17 @@ public class CartProductModel {
 		size = doc.getString("size");
 	}
 
+	public Document toDocument() {
+		Document doc = new Document();
+		doc.put("name", name);
+		doc.put("code", code);
+		doc.put("unitPrice", unitPrice);
+		doc.put("askingPrice", askingPrice);
+		doc.put("quantity", quantity);
+		doc.put("size", size);
+		return doc;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -77,23 +88,7 @@ public class CartProductModel {
 		this.size = size;
 	}
 
-	public Document toDocument() {
-		Document doc = new Document();
-		doc.put("name", name);
-		doc.put("code", code);
-		doc.put("unitPrice", unitPrice);
-		doc.put("askingPrice", askingPrice);
-		doc.put("quantity", quantity);
-		doc.put("size", size);
-		return doc;
-	}
-
 	public String toString() {
-		return "{name:" + name 
-				+ ", code: " + code 
-				+ ", unitPrice: " + unitPrice 
-				+ ", askingPrice: " + askingPrice 
-				+ ", quantity: " + quantity 
-				+ ", size:" + size + "}";
+		return "{name:" + name + ", code: " + code + ", unitPrice: " + unitPrice + ", askingPrice: " + askingPrice + ", quantity: " + quantity + ", size:" + size + "}";
 	}
 }

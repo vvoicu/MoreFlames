@@ -1,4 +1,4 @@
-package com.cucumber.pages.desktop.checkout;
+package com.cucumber.pages.desktop.cart;
 
 import java.util.List;
 

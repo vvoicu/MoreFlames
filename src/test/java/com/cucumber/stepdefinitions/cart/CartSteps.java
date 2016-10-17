@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Assert;
 
-import com.cucumber.pages.desktop.checkout.CartPage;
+import com.cucumber.pages.desktop.cart.CartPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.CartCalculations;
 import com.tools.Constants;
@@ -19,17 +19,17 @@ import cucumber.api.java.en.Then;
 
 public class CartSteps {
 	public CartPage cartPage;
-	
+
 	public List<CartProductModel> addedProductList = new ArrayList<CartProductModel>();
 	public List<CartProductModel> grabbedProductList = new ArrayList<CartProductModel>();
 
 	public CartTotalModel calculatedtotal = new CartTotalModel();
 	public CartTotalModel grabbedtotal = new CartTotalModel();
-	
+
 	public CartSteps(WebDriverCore driver) {
 		cartPage = new CartPage(driver.getDriver());
 	}
-	
+
 	@Then("the products should be correctly displayed")
 	public void validateProductsInCart() {
 		cartPage.getCartProducts();
@@ -39,16 +39,16 @@ public class CartSteps {
 	@Then("the totals should be correctly calculated")
 	public void validateTotalsInCart() {
 		cartPage.getCartTotals();
-		
+
 		addedProductList = MongoReader.grabCartProductModels(Constants.ADDED_DATA);
 		grabbedProductList = MongoReader.grabCartProductModels(Constants.EXTRACTED_DATA);
 		grabbedtotal = MongoReader.grabCartTotalModels(Constants.EXTRACTED_DATA).get(0);
-		
+
 		calculatedtotal = CartCalculations.calculateCartTotals(MongoReader.grabCartProductModels(Constants.ADDED_DATA), Constants.DELIVERY_PRICE);
 		verifyTotals();
 	}
-	
-	public void validateProducts() {
+
+	private void validateProducts() {
 		PrintUtils.printCartProductModelList(addedProductList);
 		PrintUtils.printCartProductModelList(grabbedProductList);
 
@@ -80,7 +80,7 @@ public class CartSteps {
 	 * @param cartProducts
 	 * @return
 	 */
-	public CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
+	private CartProductModel findProduct(String productCode, List<CartProductModel> cartProducts) {
 		CartProductModel result = new CartProductModel();
 		theFor: for (CartProductModel cartProductModel : cartProducts) {
 			if (cartProductModel.getCode().contains(productCode)) {
@@ -91,7 +91,7 @@ public class CartSteps {
 		return result;
 	}
 
-	public void verifyTotals() {
+	private void verifyTotals() {
 		PrintUtils.printCartTotalModel(calculatedtotal);
 		PrintUtils.printCartTotalModel(grabbedtotal);
 

@@ -46,6 +46,7 @@ public class ProductSteps {
 	@Then("the displayed products details should contain the '(.*)'")
 	public void verifyTheCategoryOfTheDisplayedProducts(String category) {
 		productListPage.verifyProductCategory(category);
+
 	}
 
 	@Then("^all the products are displayed$")
@@ -66,9 +67,9 @@ public class ProductSteps {
 		productListPage.verifyUniqueAndOpenProduct();
 		productDetailsPage.verifyProductDetails(code, title, details, price);
 	}
-	
+
 	@Then("an error message containing '(.*)' is displayed")
-	public void verifyTheErrorMessage(String serachTerm){
+	public void verifyTheErrorMessage(String serachTerm) {
 		productListPage.verifyTheErrorMessage(serachTerm);
 	}
 
@@ -78,4 +79,8 @@ public class ProductSteps {
 		productListPage.verifyItemDescriptionInProductListPage(title, details, price);
 	}
 
+	@Then("the items details in product list page is: '(.*)'")
+	public void theDisplayedProductDetails(String details) throws Throwable {
+		productListPage.verifyProductCategory(details);
+	}
 }

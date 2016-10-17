@@ -28,11 +28,11 @@ public class NavigationSteps {
 
 	public NavigationSteps(WebDriverCore driver) {
 		deviceType = driver.getDeviceType();
-//		System.out.println("DEVICE: " + deviceType);
+		//		System.out.println("DEVICE: " + deviceType);
 		//desktop pages
 		abstractPage = new AbstractPage(driver.getDriver());
 		headerPage = new HeaderPage(driver.getDriver());
-		
+
 		//mobile pages
 		headerMPage = new HeaderMPage(driver.getDriver());
 	}
@@ -47,7 +47,6 @@ public class NavigationSteps {
 		if (deviceType != null && deviceType.contains("mobile")) {
 			headerMPage.expandSearch();
 		} else {
-
 			headerPage.expandSearch();
 			headerPage.selectGender(gender);
 			headerPage.typeSearchValue(product);

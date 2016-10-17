@@ -12,7 +12,7 @@ import com.tools.data.cart.CartTotalModel;
 
 public class MongoReader extends MongoConnector {
 
-	public static List<CartProductModel> grabCartProductModels(String name){
+	public static List<CartProductModel> grabCartProductModels(String name) {
 		List<CartProductModel> resultList = new ArrayList<CartProductModel>();
 		MongoCollection<Document> table = connectToDB(name).getCollection("CartProductModel");
 		FindIterable<Document> cursor = table.find();

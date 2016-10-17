@@ -8,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Augmenter;
 
 import com.tools.Constants;
-import com.tools.mongo.MongoConnector;
 import com.tools.utils.ConfigUtils;
 
 import cucumber.api.Scenario;
@@ -29,20 +28,17 @@ public class WebDriverCore {
 		if (!initialized) {
 			initialized = true;
 			this.scenario = scenario.getName();
-			String webdriverDriver = System
-					.getProperty(Constants.BROWSER_TYPE_KEY);
-			if (webdriverDriver != null
-					&& webdriverDriver.toLowerCase().contains("chrome")) {
+			String webdriverDriver = System.getProperty(Constants.BROWSER_TYPE_KEY);
+			if (webdriverDriver != null && webdriverDriver.toLowerCase().contains("chrome")) {
 				driver = new ChromeDriver();
 			} else {
 				driver = new FirefoxDriver();
 			}
 
 			deviceType = ConfigUtils.getDeviceType();
-//			String deviceType = System.getProperty(Constants.DEVICE_TYPE_KEY);
+			//			String deviceType = System.getProperty(Constants.DEVICE_TYPE_KEY);
 
-			if (deviceType != null && !deviceType.isEmpty()
-					&& deviceType.toLowerCase().contains("mobile")) {
+			if (deviceType != null && !deviceType.isEmpty() && deviceType.toLowerCase().contains("mobile")) {
 				driver.manage().window().setSize(Constants.DEVICE_SIZE);
 			} else {
 				driver.manage().window().maximize();
@@ -57,8 +53,8 @@ public class WebDriverCore {
 	public String getScenario() {
 		return scenario;
 	}
-	
-	public String getDeviceType(){
+
+	public String getDeviceType() {
 		return deviceType;
 	}
 
@@ -66,14 +62,11 @@ public class WebDriverCore {
 	public void tearDown(Scenario scenario) {
 		try {
 			if (scenario.isFailed()) {
-				if (Boolean
-						.parseBoolean(System.getProperty("webdriver.remote"))) {
-					System.out
-							.println("Using remote webdriver take screenshot! (Augmenter)");
+				if (Boolean.parseBoolean(System.getProperty("webdriver.remote"))) {
+					System.out.println("Using remote webdriver take screenshot! (Augmenter)");
 					driver = new Augmenter().augment(driver);
 				}
-				final byte[] screenshot = ((TakesScreenshot) driver)
-						.getScreenshotAs(OutputType.BYTES);
+				final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 				scenario.embed(screenshot, "image/png");
 			}
 		} catch (Exception e) {
@@ -82,6 +75,6 @@ public class WebDriverCore {
 		driver.close();
 		driver.quit();
 
-		MongoConnector.deleteAllDbs();
+		//		MongoConnector.deleteAllDbs();
 	}
 }
