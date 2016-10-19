@@ -86,4 +86,19 @@ public class NavigationSteps {
 	public void goToCart() {
 		headerPage.goToCart();
 	}
+	
+	@Then("for mobile select the '(.*)' option")
+	public void givenTheUserSelectsTheSpecificSectionForMobile(String section) {
+		headerMPage.selectSection(section);
+	}
+	
+	@And("for mobile click the items and verify the pageUrls")
+	public void clickTheItemsForMobile(Map<String, String> items) {
+		for (String itemKey : items.keySet()) {
+			System.out.println("key: " + itemKey);
+			System.out.println("value: " + items.get(itemKey));
+			headerMPage.selectMenuOption(itemKey);
+			headerMPage.verifyTheUrlPage(items.get(itemKey));
+		}
+	}
 }
