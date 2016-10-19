@@ -28,12 +28,12 @@ public class NavigationSteps {
 
 	public NavigationSteps(WebDriverCore driver) {
 		deviceType = driver.getDeviceType();
-		//		System.out.println("DEVICE: " + deviceType);
-		//desktop pages
+		// System.out.println("DEVICE: " + deviceType);
+		// desktop pages
 		abstractPage = new AbstractPage(driver.getDriver());
 		headerPage = new HeaderPage(driver.getDriver());
 
-		//mobile pages
+		// mobile pages
 		headerMPage = new HeaderMPage(driver.getDriver());
 	}
 
@@ -46,6 +46,9 @@ public class NavigationSteps {
 	public void givenTheUserSearchesForProduct(String product, String gender) {
 		if (deviceType != null && deviceType.contains("mobile")) {
 			headerMPage.expandSearch();
+			headerMPage.selectGender(gender);
+			headerMPage.typeSearchValue(product);
+			headerMPage.submitSearch();
 		} else {
 			headerPage.expandSearch();
 			headerPage.selectGender(gender);
@@ -58,8 +61,10 @@ public class NavigationSteps {
 	@And("click the items and verify the pageUrls")
 	public void clickTheItems(Map<String, String> items) {
 		for (String itemKey : items.keySet()) {
-			System.out.println("key: " + itemKey);
-			System.out.println("value: " + items.get(itemKey));
+			if (deviceType != null && deviceType.contains("mobile")) {
+				headerMPage.selectMenuOption(itemKey);
+				headerMPage.verifyTheUrlPage(items.get(itemKey));
+			}
 			headerPage.selectMenuOption(itemKey);
 			headerPage.verifyTheUrlPage(items.get(itemKey));
 		}
@@ -74,7 +79,11 @@ public class NavigationSteps {
 
 	@Then("select the '(.*)' option")
 	public void givenTheUserSelectsTheSpecificSection(String section) {
-		headerPage.selectSection(section);
+		if (deviceType != null && deviceType.contains("mobile")) {
+			headerMPage.selectSection(section);
+		} else {
+			headerPage.selectSection(section);
+		}
 	}
 
 	@Given("click the '(.*)'")
@@ -86,19 +95,5 @@ public class NavigationSteps {
 	public void goToCart() {
 		headerPage.goToCart();
 	}
-	
-	@Then("for mobile select the '(.*)' option")
-	public void givenTheUserSelectsTheSpecificSectionForMobile(String section) {
-		headerMPage.selectSection(section);
-	}
-	
-	@And("for mobile click the items and verify the pageUrls")
-	public void clickTheItemsForMobile(Map<String, String> items) {
-		for (String itemKey : items.keySet()) {
-			System.out.println("key: " + itemKey);
-			System.out.println("value: " + items.get(itemKey));
-			headerMPage.selectMenuOption(itemKey);
-			headerMPage.verifyTheUrlPage(items.get(itemKey));
-		}
-	}
+
 }

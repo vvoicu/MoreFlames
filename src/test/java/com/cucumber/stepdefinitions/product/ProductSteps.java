@@ -7,6 +7,7 @@ import org.junit.Assert;
 
 import com.cucumber.pages.desktop.product.ProductDetailsPage;
 import com.cucumber.pages.desktop.search.ProductListPage;
+import com.cucumber.pages.mobile.search.ProductListMPage;
 import com.cucumber.stepdefinitions.WebDriverCore;
 import com.tools.data.search.SearchProductModel;
 
@@ -16,10 +17,16 @@ import cucumber.api.java.en.Then;
 public class ProductSteps {
 	public ProductListPage productListPage;
 	public ProductDetailsPage productDetailsPage;
+	public ProductListMPage productListMPage;
+
+	public String deviceType;
 
 	public ProductSteps(WebDriverCore driver) {
+		deviceType = driver.getDeviceType();
+
 		productListPage = new ProductListPage(driver.getDriver());
 		productDetailsPage = new ProductDetailsPage(driver.getDriver());
+		productListMPage = new ProductListMPage(driver.getDriver());
 	}
 
 	@Given("selects the product '(.*)'")
@@ -40,7 +47,8 @@ public class ProductSteps {
 	@Then("the displayed product code should be '(.*)'")
 	public void verifyThatProductCodeIsCorrect(String productCode) {
 		productListPage.verifyUniqueAndOpenProduct();
-		Assert.assertTrue("The product code is not correct", productDetailsPage.getProductCode().contentEquals(productCode));
+		Assert.assertTrue("The product code is not correct",
+				productDetailsPage.getProductCode().contentEquals(productCode));
 	}
 
 	@Then("the displayed products details should contain the '(.*)'")
@@ -56,21 +64,27 @@ public class ProductSteps {
 		searchList.addAll(productListPage.grabSearchProductsList());
 		System.out.println("All products: " + searchList.size());
 		while (productListPage.clickIfNextPresent()) {
-			//			productListPage.clickOnNext();
+			// productListPage.clickOnNext();
 			searchList.addAll(productListPage.grabSearchProductsList());
 		}
 		System.out.println("All products: " + searchList.size());
 	}
 
 	@Then("the displayed product should have code: '(.*)', title: '(.*)', details: '(.*)', price '(.*)'")
-	public void displayedProductCodeTitleDetailsAndPrice(String code, String title, String details, String price) throws Throwable {
+	public void displayedProductCodeTitleDetailsAndPrice(String code, String title, String details, String price)
+			throws Throwable {
 		productListPage.verifyUniqueAndOpenProduct();
 		productDetailsPage.verifyProductDetails(code, title, details, price);
 	}
 
 	@Then("an error message containing '(.*)' is displayed")
 	public void verifyTheErrorMessage(String serachTerm) {
-		productListPage.verifyTheErrorMessage(serachTerm);
+		if (deviceType != null && deviceType.contains("mobile")) {
+			productListMPage.verifyTheErrorMessage(serachTerm);
+		}else{
+			productListPage.verifyTheErrorMessage(serachTerm);
+		}
+		
 	}
 
 	@Then("the displayed product should have title: '(.*)', details: '(.*)', price '(.*)'")

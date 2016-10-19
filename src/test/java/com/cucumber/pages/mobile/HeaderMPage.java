@@ -16,6 +16,10 @@ public class HeaderMPage extends AbstractPage {
 	}
 
 	private String expandSearchButtonLocator = "a[data-mf-expand]";
+	private String menRadioButtonLocator = "[for*='Mens']";
+	private String womenRadioButtonLocator = "[for*='Womens']";
+	private String searchInputLocator = "input#search";
+	private String searchSubmitButtonLocator = "#searchSubmit";
 
 	private String menSectionLocator = "span.men";
 	private String womenSectionLocator = "span.women";
@@ -23,6 +27,23 @@ public class HeaderMPage extends AbstractPage {
 
 	public void expandSearch() {
 		waitForElementByCssLocator(expandSearchButtonLocator).click();
+	}
+
+	public void selectGender(String gender) {
+		waitForPageToLoad();
+		if (gender.contentEquals("men")) {
+			waitForElementByCssLocator(menRadioButtonLocator).click();
+		} else if (gender.contentEquals("women")) {
+			waitForElementByCssLocator(womenRadioButtonLocator).click();
+		}
+	}
+	
+	public void typeSearchValue(String searchValue) {
+		waitForElementByCssLocator(searchInputLocator).sendKeys(searchValue);
+	}
+	
+	public void submitSearch() {
+		waitForElementByCssLocator(searchSubmitButtonLocator).click();
 	}
 
 	public void selectSection(String section) {
