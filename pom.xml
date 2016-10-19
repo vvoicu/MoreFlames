@@ -18,6 +18,7 @@
 		<cucumber.version>1.2.3</cucumber.version>
 		<extentreports.version>2.41.0</extentreports.version>
 		<selenium.version>2.53.1</selenium.version>
+		<cucumber.jvm.parallel.version>1.2.1</cucumber.jvm.parallel.version>
 	</properties>
 
 	<dependencies>
@@ -40,18 +41,12 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
 			<version>${cucumber.version}</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.relevantcodes</groupId> -->
-		<!-- <artifactId>extentreports</artifactId> -->
-		<!-- <version>${extentreports.version}</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>com.sitture</groupId>
 			<artifactId>cucumber-jvm-extentreport</artifactId>
@@ -62,35 +57,12 @@
 			<artifactId>org.apache.commons.codec</artifactId>
 			<version>1.8</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>com.google.inject</groupId> -->
-		<!-- <artifactId>guice</artifactId> -->
-		<!-- <version>4.1.0</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>info.cukes</groupId> -->
-		<!-- <artifactId>cucumber-guice</artifactId> -->
-		<!-- <version>1.2.5</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
 			<version>1.2.3</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
 	<profiles>
 		<profile>
 			<id>win</id>
@@ -114,64 +86,50 @@
 				<webdriver.chrome.path>resources${file.separator}chromedriver</webdriver.chrome.path>
 			</properties>
 		</profile>
-		<profile>
-			<id>release</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.3</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>2.2.1</version>
-						<executions>
-							<execution>
-								<id>attach-sources</id>
-								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.3</version>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+			</plugin>
+			<plugin>
+				<groupId>com.github.temyers</groupId>
+				<artifactId>cucumber-jvm-parallel-plugin</artifactId>
+				<version>${cucumber.jvm.parallel.version}</version>
+				<executions>
+					<execution>
+						<id>generateRunners</id>
+						<phase>test</phase>
+						<goals>
+							<goal>generateRunners</goal>
+						</goals>
+						<!-- <configuration> -->
+						<!-- <glue>com.opencredo.test.ui.acceptance.test.step.definitions</glue> -->
+						<!-- <outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory> -->
+						<!-- <featuresDirectory>src/test/resources/cucumber/</featuresDirectory> -->
+						<!-- <cucumberOutputDir>target/cucumber-parallel</cucumberOutputDir> -->
+						<!-- <format>html</format> -->
+						<!-- <strict>true</strict> -->
+						<!-- <monochrome>true</monochrome> -->
+						<!-- <tags>"~@ignore"</tags> -->
+						<!-- <filterFeaturesByTags>true</filterFeaturesByTags> -->
+						<!-- </configuration> -->
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19</version>
+				<configuration>
+					<forkCount>2</forkCount>
+					<reuseForks>false</reuseForks>
+					<includes>
+						<include>**/TestRunner.class</include>
+					</includes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
-
