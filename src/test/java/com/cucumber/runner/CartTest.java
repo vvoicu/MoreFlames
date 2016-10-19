@@ -21,7 +21,7 @@ import cucumber.api.junit.Cucumber;
  * 
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(features = { "src/test/resources/features/cart/CheckProductsFrInCart.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = { "com.sitture.ExtentFormatter" })
+@CucumberOptions(features = { "src/test/resources/features/search/SearchUsingInvalidCharactersM.feature" }, glue = { "com.cucumber.stepdefinitions" }, plugin = { "com.sitture.ExtentFormatter" })
 public class CartTest {
 
 	@BeforeClass
