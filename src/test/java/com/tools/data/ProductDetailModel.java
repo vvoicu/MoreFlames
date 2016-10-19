@@ -6,6 +6,16 @@ public class ProductDetailModel {
 	private String code;
 	private String price;
 	private String details;
+	private String size;
+
+	
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
 
 	public String getTitle() {
 		return title;
